@@ -16,14 +16,14 @@ const Header: React.FC<IHeaderProps> = (props) => {
   };
 
   return (
-    <header className="w-screen h-32 bg-[#EC1D24] flex items-center p-8">
-      <div className="flex m-16">
+    <header className="w-screen h-32 bg-[#EC1D24] flex flex-col p-0 m-0 items-center md:flex-row md:p-8">
+      <div className="flex flex-grow m-3">
         <h1 className="text-2xl">Marvel Heroes</h1>
       </div>
 
-      <div className="flex flex-col mr-40">
+      <div className="flex flex-col m-3 md:self-baseline md:ml-auto">
         <p>Look for your favorite heroes</p>
-        <div className="flex flex-grow">
+        <div className="flex">
           <input
             value={enteredText}
             className="flex w-96"

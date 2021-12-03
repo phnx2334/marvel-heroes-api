@@ -1,5 +1,6 @@
 import axios from "axios";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { Character, CharacterMin } from "../../types/character";
 import api from "../../util/api";
 
 const entity = "characters";
@@ -19,8 +20,6 @@ export default async function charactersHandler(
       try {
         const charName = text;
 
-        console.log("the text is", text);
-
         const fullUrl = `${
           api.baseURL
         }${entity}?nameStartsWith=${charName}&orderBy=name&ts=${
@@ -29,11 +28,22 @@ export default async function charactersHandler(
 
         const response = await axios.get(fullUrl);
 
-        console.log("the response data is", response);
+        console.log("response is", response);
 
-        res.status(200).send(response.data);
+        const characters = response.data.data.results.map((item: Character) => {
+          return {
+            id: item.id,
+            name: item.name,
+            description: item.description,
+            image: `${item.thumbnail.path}.${item.thumbnail.extension}`,
+            apiPage: `api/${item.name}`,
+          };
+        });
+
+        res.status(200).send(characters);
       } catch (error) {
         console.log("error fetching characters", error);
+        res.status(500).send(error);
       }
 
       break;
