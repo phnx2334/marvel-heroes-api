@@ -1,35 +1,50 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import pic1 from "../assets/1.jpg";
-import pic2 from "../assets/2.jpg";
-import pic3 from "../assets/3.jpg";
-import pic4 from "../assets/4.jpg";
-import pic5 from "../assets/5.jpg";
-import pic6 from "../assets/6.jpg";
+import { useEffect, useState } from "react";
 import Header from "../components/Header/Header";
-import Nav from "../components/Nav/Nav";
+import CharactersNav from "../components/CharactersNav/CharactersNav";
+import axios from "axios";
+import { Character, CharacterMin } from "../types/character";
 
 const Home: NextPage = () => {
-  const images = [
-    { name: "Spidey", image: pic1 },
-    { name: "Avengers", image: pic2 },
-    { name: "Black Panther", image: pic3 },
-    { name: "IronMan", image: pic4 },
-    { name: "Deadpool", image: pic5 },
-    { name: "Captain America", image: pic6 },
-    { name: "Spidey", image: pic1 },
-    { name: "Avengers", image: pic2 },
-    { name: "Black Panther", image: pic3 },
-    { name: "IronMan", image: pic4 },
-    { name: "Deadpool", image: pic5 },
-    { name: "Captain America", image: pic6 },
-    { name: "Spidey", image: pic1 },
-    { name: "Avengers", image: pic2 },
-    { name: "Black Panther", image: pic3 },
-    { name: "IronMan", image: pic4 },
-    { name: "Deadpool", image: pic5 },
-    { name: "Captain America", image: pic6 },
-  ];
+  const [info, setInfo] = useState<CharacterMin[]>([]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async (input?: string) => {
+    input = "spi";
+
+    try {
+      const response = await axios.get("api/characters", {
+        params: {
+          text: input,
+        },
+      });
+
+      const purged = purgeData(response.data.data.results);
+
+      setInfo(purged);
+    } catch (error) {
+      console.log("Error fetching server side data", error);
+    }
+  };
+
+  const purgeData = (data: Character[]) => {
+    const characters = data.map((item) => {
+      return {
+        id: item.id,
+        name: item.name,
+        description: item.description,
+        image: `${item.thumbnail.path}.${item.thumbnail.extension}`,
+        apiPage: `api/${item.name}`,
+      };
+    });
+
+    return characters;
+  };
+
   return (
     <div className="">
       <Head>
@@ -41,7 +56,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <Nav items={images} />
+      <CharactersNav characters={info} />
     </div>
   );
 };
