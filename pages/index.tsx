@@ -1,21 +1,17 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Header from "../components/Header/Header";
 import CharactersNav from "../components/CharactersNav/CharactersNav";
 import axios from "axios";
 import { Character, CharacterMin } from "../types/character";
 
 const Home: NextPage = () => {
+  const [searchTerm, setsearchTerm] = useState("");
   const [info, setInfo] = useState<CharacterMin[]>([]);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async (input?: string) => {
-    input = "spi";
-
+  const fetchData = async (input: string) => {
+    console.log("the input is", input);
     try {
       const response = await axios.get("api/characters", {
         params: {
@@ -23,9 +19,15 @@ const Home: NextPage = () => {
         },
       });
 
-      const purged = purgeData(response.data.data.results);
+      console.log("response data", response);
 
-      setInfo(purged);
+      if (response.data.length) {
+        console.log("the response in the client is", response);
+
+        const purged = purgeData(response.data.results);
+
+        setInfo(purged);
+      }
     } catch (error) {
       console.log("Error fetching server side data", error);
     }
@@ -45,6 +47,19 @@ const Home: NextPage = () => {
     return characters;
   };
 
+  useEffect(() => {
+    let timoutid = setTimeout(() => {
+      if (searchTerm.length > 2) {
+        fetchData(searchTerm);
+      }
+    }, 500);
+    return () => {
+      clearTimeout(timoutid);
+    };
+  }, [fetchData, searchTerm]);
+
+  const onClickSearch = () => {};
+
   return (
     <div className="">
       <Head>
@@ -55,7 +70,10 @@ const Home: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header />
+      <Header
+        changeValueHandler={setsearchTerm}
+        onClickSearch={onClickSearch}
+      />
       <CharactersNav characters={info} />
     </div>
   );

@@ -18,13 +18,18 @@ export default async function charactersHandler(
     case "GET":
       try {
         const charName = text;
-        
-        const fullUrl = `${api.baseURL}${entity}?
-        nameStartsWith=${charName}&
-        orderBy=name&
-        ts=${api.timestamp}&apikey=${api.public_apiKey}&hash=${api.hash}`;
+
+        console.log("the text is", text);
+
+        const fullUrl = `${
+          api.baseURL
+        }${entity}?nameStartsWith=${charName}&orderBy=name&ts=${
+          api.timestamp
+        }&apikey=${api.public_apiKey}&hash=${api.calcHash()}`;
 
         const response = await axios.get(fullUrl);
+
+        console.log("the response data is", response);
 
         res.status(200).send(response.data);
       } catch (error) {
