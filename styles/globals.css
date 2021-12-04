@@ -5,6 +5,35 @@
 
 @layer base {
   body {
-    @apply bg-[#06202A] text-gray-300
+    @apply bg-[#06202A] text-gray-300;
   }
+
+  .collapsible .toggle {
+    background: blue;
+    border: unset;
+    cursor: pointer;
+    padding: 0.3rem;
+    border-radius: 5px;
+    color: white;
+    margin: 10px;
+  }
+
+  .collapsible .content {
+    border: 1px solid white;
+    padding: 0.5rem;
+    border-radius: 5px;
+    margin: 10px;
+  }
+
+ 
+}
+
+.collapsible .content-parent {
+  height: 0px;
+  overflow: hidden;
+  transition: height ease 0.3s;
+}
+
+.collapsible .content-parent .show {
+  height: auto;
 }
