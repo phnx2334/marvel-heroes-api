@@ -21,4 +21,5 @@ export interface CharacterMin {
   description: string;
   image: string;
   apiPage: string;
+  resource:string
 }

@@ -7,13 +7,14 @@ interface ICharactersNavProps {
 }
 
 const CharactersNav: React.FC<ICharactersNavProps> = ({ characters }) => {
-
-  if(!characters.length){
-    return(<h1 className="flex text-center">Start looking for your favorite heroes!</h1>)
+  if (!characters.length) {
+    return (
+      <h1 className="flex text-center">
+        Start looking for your favorite heroes!
+      </h1>
+    );
   }
 
-
-  
   return (
     <nav className="relative">
       <div className="flex items-center justify-center w-full text-2xl font-bold text-white bg-red-500">

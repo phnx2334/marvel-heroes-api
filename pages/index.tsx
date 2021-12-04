@@ -13,7 +13,7 @@ const Home: NextPage = () => {
   const fetchData = async (input: string) => {
     console.log("fetching data");
     try {
-      const response = await axios.get("api/characters", {
+      const response = await axios.get("api/charactersList", {
         params: {
           text: input,
         },

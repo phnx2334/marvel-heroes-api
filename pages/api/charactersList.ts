@@ -15,21 +15,21 @@ export default async function charactersHandler(
     method,
   } = req;
 
-  switch (method) {
-    case "GET":
-      try {
-        const charName = text;
+  if (method === "GET") {
+    try {
+      const charName = text;
 
-        const fullUrl = `${
-          api.baseURL
-        }${entity}?nameStartsWith=${charName}&orderBy=name&ts=${
-          api.timestamp
-        }&apikey=${api.public_apiKey}&hash=${api.calcHash()}`;
+      const fullUrl = `${
+        api.baseURL
+      }${entity}?nameStartsWith=${charName}&orderBy=name&ts=${
+        api.timestamp
+      }&apikey=${api.public_apiKey}&hash=${api.calcHash()}`;
 
-        const response = await axios.get(fullUrl);
+      const response = await axios.get(fullUrl);
 
-        console.log("response is", response);
+      console.log("response is", response);
 
+      if (response.data.data.results.length) {
         const characters = response.data.data.results.map((item: Character) => {
           return {
             id: item.id,
@@ -37,20 +37,20 @@ export default async function charactersHandler(
             description: item.description,
             image: `${item.thumbnail.path}.${item.thumbnail.extension}`,
             apiPage: `api/${item.name}`,
+            resource: item.resourceURI,
           };
         });
 
         res.status(200).send(characters);
-      } catch (error) {
-        console.log("error fetching characters", error);
-        res.status(500).send(error);
+      } else {
+        res.status(404).send("Hero not found");
       }
-
-      break;
-    case "PUT":
-      break;
-    default:
-      res.setHeader("Allow", ["GET", "PUT"]);
-      res.status(405).end(`Method ${method} Not Allowed`);
+    } catch (error) {
+      console.log("error fetching characters", error);
+      res.status(500).send(error);
+    }
+  } else {
+    res.setHeader("Allow", ["GET"]);
+    res.status(405).end(`Method ${method} Not Allowed`);
   }
 }
