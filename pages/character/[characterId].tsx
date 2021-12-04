@@ -1,35 +1,41 @@
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { GetStaticProps } from "next";
-import { ParsedUrlQuery } from "querystring";
+import { GetServerSidePropsContext } from "next";
 import BaseLayout from "../../components/Layout/BaseLayout";
+import axios from "axios";
 
-interface IParams extends ParsedUrlQuery {
-  characterId: string;
+interface ICharacterDetailProps {
+  character: any;
 }
 
-interface ICharacterDetailProps {}
-
 const CharacterDetail: React.FC<ICharacterDetailProps> = (props) => {
-  const router = useRouter();
-
-  const charId = router.query.characterId;
-
-  useEffect(() => {}, []);
-
+  console.log("the data is", props.character);
   return <BaseLayout></BaseLayout>;
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  const { characterId } = context.params as IParams;
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  const characterId = context.params!.characterId;
 
-  
+  try {
+    const response = await axios.get("http://localhost:3000/api/character", {
+      params: {
+        characterId: characterId,
+      },
+    });
 
-  return {
-    props: {
-      results: [],
-    },
-  };
+    return {
+      props: {
+        character: response.data,
+      },
+    };
+  } catch (error) {
+    console.log("Error fetching server side data", error);
+    return {
+      props: {
+        character: [],
+      },
+    };
+  }
 };
 
 export default CharacterDetail;

@@ -11,7 +11,6 @@ const Home: NextPage = () => {
   const [info, setInfo] = useState<CharacterMin[]>([]);
 
   const fetchData = async (input: string) => {
-    console.log("fetching data");
     try {
       const response = await axios.get("api/charactersList", {
         params: {
@@ -25,9 +24,7 @@ const Home: NextPage = () => {
     }
   };
 
-
   const updateResults = async (newText: string) => {
-    console.log("trying to update", newText);
     if (newText.length < 3) {
       return;
     }
@@ -45,7 +42,10 @@ const Home: NextPage = () => {
           name="description"
           content="Mavel Heroes page with all you need to know about your favorite heroes"
         />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header
