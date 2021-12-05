@@ -1,4 +1,4 @@
-export interface IComic {
+export interface Comic {
   id: number;
   digitalId: number; //Will be 0 if the comic is not available digitally.
   title: string;
@@ -15,7 +15,10 @@ export interface IComic {
   pageCount: number;
   textObjects: any[]; //Array[TextObject]	A set of descriptive text blurbs for the comic.
   resourceURI: string;
-  urls: any[]; //Array[Url]	A set of public web site URLs for the resource.
+  urls: {
+    type: string;
+    url: string;
+  }[]; //Array[Url]	A set of public web site URLs for the resource.
   series: any; //SeriesSummary
   variants: any[]; //Array[ComicSummary]	A list of variant issues for this comic (includes the "original" issue if the current issue is a variant).
   collections: any[]; //Array[ComicSummary]	A list of collections which include this comic (will generally be empty if the comic's format is a collection).
@@ -32,3 +35,5 @@ export interface IComic {
   stories: any; //ResourceList	A resource list containing the stories which appear in this comic.
   events: any; //ResourceList	A resource list containing the events in which this comic appears.
 }
+
+

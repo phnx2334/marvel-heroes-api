@@ -21,5 +21,24 @@ export interface CharacterMin {
   description: string;
   image: string;
   apiPage: string;
-  resource:string
+  resource: string;
+}
+
+export interface characterFull {
+  id: number;
+  name: string;
+  description: string;
+  image: string;
+  comics: ComicSeries[];
+  series: ComicSeries[];
+}
+
+export interface ComicSeries {
+  title: string;
+  urls: {
+    type: string;
+    url: string;
+  }[];
+  image: string;
+  [key: string]: any;
 }

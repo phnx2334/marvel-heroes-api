@@ -20,7 +20,7 @@ const CharactersNav: React.FC<ICharactersNavProps> = ({ characters }) => {
       <div className="flex items-center justify-center w-full text-2xl font-bold text-white bg-red-500">
         <h1>Select your hero</h1>
       </div>
-      <div className="flex p-6 space-x-10 overflow-x-scroll text-2xl px10 sm:px-20 whitespace-nowrap sm:space-x-20 scrollbar-hide">
+      <div className="flex p-6 space-x-10 overflow-x-scroll text-2xl px10  whitespace-nowrap sm:px-20 sm:space-x-20 scrollbar-hide">
         {characters.map((item) => {
           return <CharacterItem key={item.id} character={item} />;
         })}

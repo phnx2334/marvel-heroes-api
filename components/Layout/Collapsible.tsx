@@ -1,4 +1,4 @@
-import { useState, useRef, MutableRefObject } from "react";
+import { useRef, useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/outline";
 
 interface ICollapsibleProps {
@@ -7,38 +7,33 @@ interface ICollapsibleProps {
 
 const Collapsible: React.FC<ICollapsibleProps> = (props) => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const containerRef = useRef<any>();
-  const scrollHeight = containerRef.current
-    ? containerRef.current.scrollHeight
-    : 0;
-
-  const maxH = isOpen ? `max-h-[${scrollHeight}px]` : `max-h-0`;
-  const rotate = isOpen ? "rotate-180" : "";
-
-  console.log("scroll height", scrollHeight);
-  console.log("maxH", maxH);
-  console.log("rotate", rotate);
+  const parentRef = useRef<any>();
+  const rotate = isOpen ? "rotate-180" : "rotate-0";
 
   return (
-    <div className="relative w-[370px] overflow-hidden m-20">
+    <div className="relative mw-[370px] m-0 sm:w-full">
       <div
-        className="flex items-center w-full h-12 pl-5 bg-blue-500 cursor-pointer"
+        className="flex items-center w-full h-12 pl-5 bg-gray-700 cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
       >
         <h1 className="text-lg font-semibold text-white">{props.label}</h1>
+
         <ChevronDownIcon
           width="20px"
-          className={`absolute text-white transition-transform duration-500 rotate-0 top-3 right-3 ${rotate}`}
+          className={`absolute text-white transition-transform duration-700  top-3 right-3 ${rotate}`}
         />
       </div>
 
-      {/* Content */}
       <div
-        className={`overflow-hidden transition-all duration-500 bg-white ${maxH}`}
-        ref={containerRef}
+        className={`overflow-hidden transition-all duration-700 bg-white w-full`}
+        ref={parentRef}
+        style={
+          isOpen
+            ? { height: parentRef.current.scrollHeight + "px" }
+            : { height: "0px" }
+        }
       >
-        <div className="p-4">{props.children}</div>
+        {props.children}
       </div>
     </div>
   );

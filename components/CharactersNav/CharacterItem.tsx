@@ -19,7 +19,7 @@ const CharacterItem: React.FC<ICharactersItemProps> = ({ character }) => {
   return (
     <Link href={linkRef} passHref>
       <div
-        className={`flex flex-col items-center min-w-full m-1 ${pointer} group sm:min-w-min sm:hover:scale-105 hover:z-50`}
+        className={`flex flex-col items-center min-w-full m-1 ${pointer} group sm:min-w-min hover:scale-105 hover:z-50`}
       >
         <Image
           src={character.image}
