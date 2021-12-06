@@ -42,3 +42,16 @@ export interface ComicSeries {
   image: string;
   [key: string]: any;
 }
+
+export interface MediaCharacter {
+  characters: {
+    available: number;
+    collectionURI: string;
+    items: {
+      resourceURI: string;
+      name: string;
+    }[];
+    returned: number;
+  };
+  [key: string]: any;
+}

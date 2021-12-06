@@ -4,7 +4,7 @@ import Link from "next/link";
 import SearchBar from "../SearchBar/SearchBar";
 
 interface IHeaderProps {
-  changeValueHandler?: (enteredText: string) => void;
+  changeValueHandler?: (enteredText: string, filter: string) => void;
   onClickSearch?: () => void;
 }
 

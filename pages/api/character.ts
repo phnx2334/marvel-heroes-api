@@ -1,13 +1,12 @@
 import axios from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
-import api from "../../util/api";
+import buildUrl from "../../util/api";
 import { Character, characterFull, ComicSeries } from "../../types/character";
 
 export default async function characterHandler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const entity = "characters";
   const {
     query: { characterId },
     method,
@@ -15,23 +14,13 @@ export default async function characterHandler(
 
   switch (method) {
     case "GET":
-      const characterUrl = `${api.baseURL}${entity}/${characterId}?&ts=${
-        api.ts
-      }&apikey=${api.public_apiKey}&hash=${api.calcHash()}`;
-      const comicsUrl = `${api.baseURL}${entity}/${characterId}/comics?&ts=${
-        api.ts
-      }&apikey=${api.public_apiKey}&hash=${api.calcHash()}`;
-      const seriesUrl = `${api.baseURL}${entity}/${characterId}/series?&ts=${
-        api.ts
-      }&apikey=${api.public_apiKey}&hash=${api.calcHash()}`;
-      /* const storiesUrl = `${api.baseURL}${entity}/${characterId}/stories?&ts=${
-        api.ts
-      }&apikey=${api.public_apiKey}&hash=${api.calcHash()}`; */
+      const characterUrl = buildUrl("character", characterId as string);
+      const comicsUrl = buildUrl("character-c", characterId as string);
+      const seriesUrl = buildUrl("character-s", characterId as string);
 
       const charReq = axios.get(characterUrl);
       const comicsReq = axios.get(comicsUrl);
       const seriesReq = axios.get(seriesUrl);
-      /* const storiesReq = axios.get(storiesUrl); */
 
       axios
         .all([charReq, comicsReq, seriesReq])

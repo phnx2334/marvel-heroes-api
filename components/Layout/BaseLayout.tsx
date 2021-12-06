@@ -3,9 +3,9 @@ import Header from "../Header/Header";
 
 const BaseLayout: React.FC = (props) => {
   return (
-    <div className="relative p-2">
+    <div className="relative">
       <Header />
-      {props.children}
+      <div className="p-2">{props.children}</div>
       <Footer />
     </div>
   );

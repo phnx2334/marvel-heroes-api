@@ -1,20 +1,21 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import Header from "../components/Header/Header";
 import CharactersNav from "../components/CharactersNav/CharactersNav";
 import axios from "axios";
-import { Character, CharacterMin } from "../types/character";
+import { CharacterMin } from "../types/character";
 import Footer from "../components/Footer/Footer";
 
 const Home: NextPage = () => {
   const [info, setInfo] = useState<CharacterMin[]>([]);
 
-  const fetchData = async (input: string) => {
+  const fetchData = async (input: string, filter: string) => {
     try {
       const response = await axios.get("api/charactersList", {
         params: {
           text: input,
+          filter: filter,
         },
       });
 
@@ -24,12 +25,12 @@ const Home: NextPage = () => {
     }
   };
 
-  const updateResults = async (newText: string) => {
+  const updateResults = async (newText: string, filter: string) => {
     if (newText.length < 3) {
       return;
     }
 
-    await fetchData(newText);
+    await fetchData(newText, filter);
   };
 
   const onClickSearch = () => {};
