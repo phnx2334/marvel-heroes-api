@@ -8,21 +8,24 @@
     @apply bg-[#06202A] text-gray-300;
   }
 
-  .collapsible .toggle {
-    background: blue;
-    border: unset;
-    cursor: pointer;
-    padding: 0.3rem;
-    border-radius: 5px;
-    color: white;
-    margin: 10px;
+  /* width */
+  ::-webkit-scrollbar {
+    height: 5px;
   }
 
-  .collapsible .content {
-    border: 1px solid white;
-    padding: 0.5rem;
-    border-radius: 5px;
-    margin: 10px;
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #555;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: red;
   }
 
   input[type="text"] {

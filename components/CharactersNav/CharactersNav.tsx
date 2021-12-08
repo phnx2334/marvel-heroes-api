@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import CharContext from "../../context/charactersContext";
 import CharacterItem from "./CharacterItem";
+import { CogIcon } from "@heroicons/react/outline";
 
 const skeleton = (
   <div className="h-[400px] w-[220px] m-5 p-0 bg-gray-300 relative">
@@ -22,7 +23,7 @@ const skeleton = (
 const CharactersNav: React.FC = () => {
   const ctx = useContext(CharContext);
 
-  if(ctx.hasError){
+  if (ctx.hasError) {
     return (
       <div className="flex  p-5 flex-row w-full h-full text-4xl text-center">
         <h1 className="m-auto">{ctx.errorMsg}</h1>
@@ -55,11 +56,13 @@ const CharactersNav: React.FC = () => {
   }
 
   return (
-    <nav className="relative">
+    <nav>
       <div className="flex items-center justify-center w-full text-2xl font-bold text-white bg-red-500">
         <h1>Select your hero</h1>
+
+        <CogIcon width="20px" className="absolute right-1" />
       </div>
-      <div className="flex p-6 space-x-10 overflow-x-scroll text-2xl px10  whitespace-nowrap sm:px-20 sm:space-x-20 scrollbar-hide">
+      <div className="flex p-6 space-x-10 overflow-x-scroll text-2xl px10  whitespace-nowrap sm:px-20 sm:space-x-20 scrollbar-hide sm:scrollbar-default">
         {ctx.characterList.map((item) => {
           return <CharacterItem key={item.id} character={item} />;
         })}
@@ -69,7 +72,3 @@ const CharactersNav: React.FC = () => {
 };
 
 export default CharactersNav;
-
-{
-  /* <div className="absolute bottom-0 right-0 bg-gradient-to-l from-[#06202A] h-80 w-1/12" /> */
-}
