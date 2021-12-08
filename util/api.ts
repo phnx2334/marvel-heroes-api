@@ -20,7 +20,7 @@ export type filters =
   | "stories";
 
 const buildUrl = (filter: filters, value: string) => {
-  let url=''
+  let url = "";
 
   switch (filter) {
     case "character":
@@ -44,7 +44,7 @@ const buildUrl = (filter: filters, value: string) => {
       url = `${baseURL}${filter}?titleStartsWith=${value}&orderBy=title&ts=${ts}&apikey=${public_apiKey}&hash=${calcHash()}`;
       break;
     case "stories":
-      url = `${baseURL}${filter}?titleStartsWith=${value}&orderBy=title&ts=${ts}&apikey=${public_apiKey}&hash=${calcHash()}`;
+      url = `${baseURL}${filter}?titleStartsWith=${value}&orderBy=id&ts=${ts}&apikey=${public_apiKey}&hash=${calcHash()}`;
       break;
 
     default:

@@ -34,13 +34,3 @@
     padding: 0.5rem;
   }
 }
-/* 
-.collapsible .content-parent {
-  height: 0px;
-  overflow: hidden;
-  transition: height ease 0.3s;
-}
-
-.collapsible .content-parent .show {
-  height: auto;
-} */

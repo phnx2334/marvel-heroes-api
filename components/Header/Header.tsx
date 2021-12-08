@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import Link from "next/link";
 import SearchBar from "../SearchBar/SearchBar";
 
-interface IHeaderProps {
-  changeValueHandler?: (enteredText: string, filter: string) => void;
-  onClickSearch?: () => void;
-}
+interface IHeaderProps {}
 
-const Header: React.FC<IHeaderProps> = ({ changeValueHandler }) => {
+const Header: React.FC<IHeaderProps> = () => {
   return (
     <header className="h-auto w-full bg-[#EC1D24] flex flex-col items-center justify-center md:flex-row md:p-8 md:items-start">
       <Link href="/" passHref>
@@ -18,13 +15,7 @@ const Header: React.FC<IHeaderProps> = ({ changeValueHandler }) => {
           </h1>
         </div>
       </Link>
-
-      {changeValueHandler && (
-        <SearchBar
-          changeValueHandler={changeValueHandler}
-          onClickSearch={() => {}}
-        />
-      )}
+      <SearchBar />
     </header>
   );
 };

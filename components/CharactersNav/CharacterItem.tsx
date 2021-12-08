@@ -2,9 +2,8 @@ import Image from "next/image";
 import { CharacterMin } from "../../types/character";
 import Link from "next/link";
 import { StarIcon, PencilAltIcon } from "@heroicons/react/outline";
-import { StarIcon as StarIconSolid } from "@heroicons/react/solid";
+import { StarIcon as StarIconSolid, TrashIcon } from "@heroicons/react/solid";
 import React, { useState } from "react";
-import { json } from "stream/consumers";
 
 interface ICharactersItemProps {
   character: CharacterMin;
@@ -22,6 +21,23 @@ const initFavStorage = (id: number) => {
   if (lstorage === null) {
     console.log("created local storage for favorites");
     localStorage.setItem("favorites", "");
+    return false;
+  }
+
+  if (lstorage.includes(id.toString())) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+const initDeletedStorage = (id: number) => {
+  //If the deleted item does not exist, I create it
+  const lstorage = localStorage.getItem("deleted");
+
+  if (lstorage === null) {
+    console.log("created local storage for deleted");
+    localStorage.setItem("deleted", "");
     return false;
   }
 
@@ -61,6 +77,10 @@ const CharacterItem: React.FC<ICharactersItemProps> = ({ character }) => {
     initNameStorage(character.id.toString())
   );
 
+  const [deleted, setDeleted] = useState<boolean>(
+    initDeletedStorage(character.id)
+  );
+
   const [isEditable, setIsEditable] = useState(false);
 
   const description = character.description
@@ -69,7 +89,7 @@ const CharacterItem: React.FC<ICharactersItemProps> = ({ character }) => {
 
   const linkRef = `/character/${character.id}`;
 
-  const clickFavHandler = (e: React.MouseEvent) => {
+  const onClickFavHandler = (e: React.MouseEvent) => {
     e.preventDefault();
     const id = character.id.toString();
 
@@ -94,6 +114,27 @@ const CharacterItem: React.FC<ICharactersItemProps> = ({ character }) => {
       items.push(id);
       localStorage.setItem("favorites", items.join(","));
       setFavorite(true);
+    }
+  };
+
+  const onClickDeleteHandler = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const id = character.id.toString();
+
+    const currentLStorage = localStorage.getItem("deleted");
+
+    if (currentLStorage!.length > 0) {
+      const items = currentLStorage!.split(",");
+      if (!items.includes(id)) {
+        items.push(id);
+        localStorage.setItem("deleted", items.join(","));
+        setDeleted(true);
+      }
+    } else {
+      const items = [];
+      items.push(id);
+      localStorage.setItem("deleted", items.join(","));
+      setDeleted(true);
     }
   };
 
@@ -122,7 +163,7 @@ const CharacterItem: React.FC<ICharactersItemProps> = ({ character }) => {
     }
   };
 
-  const clickEditNameHandler = (e: React.MouseEvent) => {
+  const onClickEditNameHandler = (e: React.MouseEvent) => {
     e.preventDefault();
     setIsEditable((prevState) => !prevState);
   };
@@ -133,7 +174,9 @@ const CharacterItem: React.FC<ICharactersItemProps> = ({ character }) => {
       passHref
     >
       <div
-        className={`flex flex-col relative border-2 items-center m-1 max-h-[400px] cursor-pointer group hover:scale-105 hover:z-50`}
+        className={`flex flex-col relative border-2 items-center m-1 max-h-[400px]  max-w-min cursor-pointer group hover:scale-105 hover:z-50 ${
+          deleted && "hidden"
+        }`}
       >
         <div className="p0 m-0   min-w-[220px] max-w-[220px]   max-h-[220px]">
           <Image
@@ -148,8 +191,8 @@ const CharacterItem: React.FC<ICharactersItemProps> = ({ character }) => {
         <div className="flex bg-gray-800  p-1 flex-row justify-between  w-full">
           <PencilAltIcon
             width="20px"
-            className="text-white mx-1 hover:text-red-600 cursor-default"
-            onClick={clickEditNameHandler}
+            className="text-white mx-1 hover:text-blue-600 cursor-default"
+            onClick={onClickEditNameHandler}
           />
           {favorite ? (
             <StarIconSolid
@@ -157,7 +200,7 @@ const CharacterItem: React.FC<ICharactersItemProps> = ({ character }) => {
               className={`text-white mx-1 hover:text-yellow-300 cursor-default ${
                 favorite ? "text-yellow-300" : ""
               } `}
-              onClick={clickFavHandler}
+              onClick={onClickFavHandler}
             />
           ) : (
             <StarIcon
@@ -165,14 +208,20 @@ const CharacterItem: React.FC<ICharactersItemProps> = ({ character }) => {
               className={`text-white mx-1 hover:text-yellow-300 cursor-default ${
                 favorite ? "text-yellow-300" : ""
               } `}
-              onClick={clickFavHandler}
+              onClick={onClickFavHandler}
             />
           )}
+
+          <TrashIcon
+            width="20px"
+            className="text-white mx-1 hover:text-red-600 cursor-default"
+            onClick={onClickDeleteHandler}
+          />
         </div>
         {isEditable ? (
           <input
             type="text"
-            className="max-w-sm bg-gray-400 text-opacity-100 bg-opacity-10 text-white"
+            className="max-w-sm bg-gray-400 text-opacity-100 bg-opacity-10 text-white mt-2"
             onChange={modifyNameStorage}
             value={alterName}
             onKeyDown={onKeyPressHandler}
