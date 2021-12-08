@@ -24,8 +24,14 @@ const SearchBar: React.FC<ISearchBarProps> = () => {
     }
   };
 
-  const makeSearchClick = (e: React.MouseEvent) => {
-    ctx.fetchCharacters(enteredText, filter);
+  const makeSearchClick = (e: React.MouseEvent<HTMLInputElement>) => {
+    ctx.fetchCharacters(enteredText, e.currentTarget.value);
+  };
+
+  const onFavoritesFilter = () => {
+    const storage = localStorage.getItem("favorites")!;
+
+    ctx.fetchFavorites(storage);
   };
 
   return (
@@ -39,7 +45,10 @@ const SearchBar: React.FC<ISearchBarProps> = () => {
           onKeyDown={makeSearchEnter}
           placeholder="Look for your favorite heroes!"
         />
-        <SearchIcon className="ml-2 w-7 text-white cursor-pointer" onClick={makeSearchClick} />
+        <SearchIcon
+          className="ml-2 w-7 text-white cursor-pointer"
+          onClick={() => ctx.fetchCharacters(enteredText, filter)}
+        />
       </div>
 
       <div
@@ -47,23 +56,49 @@ const SearchBar: React.FC<ISearchBarProps> = () => {
         onChange={onChangeRadioHandler}
       >
         <label className="flex items-center mr-3">
-          <input type="radio" value="characters" name="filter" onClick={makeSearchClick} defaultChecked />
+          <input
+            type="radio"
+            value="characters"
+            name="filter"
+            onClick={makeSearchClick}
+            defaultChecked
+          />
           Characters
         </label>
         <label className="flex items-center mr-3">
-          <input type="radio" value="comics" name="filter" onClick={makeSearchClick}/>
+          <input
+            type="radio"
+            value="comics"
+            name="filter"
+            onClick={makeSearchClick}
+          />
           Comics
         </label>
         <label className="flex items-center mr-3">
-          <input type="radio" value="stories" name="filter" onClick={makeSearchClick}/>
+          <input
+            type="radio"
+            value="stories"
+            name="filter"
+            onClick={makeSearchClick}
+          />
           Stories
         </label>
         <label className="flex items-center mr-3">
-          <input type="radio" value="series" name="filter" onClick={makeSearchClick} />
+          <input
+            type="radio"
+            value="series"
+            name="filter"
+            onClick={makeSearchClick}
+          />
           Series
         </label>
         <label className="flex items-center mr-3">
-          <input type="radio" value="favorites" name="filter" />
+          <input
+            type="radio"
+            value="favorites"
+            name="filter"
+            onClick={onFavoritesFilter}
+          />
           Favorites
         </label>
       </div>

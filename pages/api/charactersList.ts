@@ -2,7 +2,6 @@ import axios from "axios";
 import type { NextApiRequest, NextApiResponse } from "next";
 import {
   Character,
-  characterFull,
   MediaCharacter,
 } from "../../types/character";
 import buildUrl, { filters } from "../../util/api";
@@ -48,10 +47,6 @@ export default async function charactersListHandler(
           res.status(200).send(characters);
         });
       }
-
-      //Filter the ones that have a character
-
-      //Query for those specific characters
     } catch (error) {
       console.log("error fetching characters", error);
       res.status(500).send(error);

@@ -22,6 +22,14 @@ const skeleton = (
 const CharactersNav: React.FC = () => {
   const ctx = useContext(CharContext);
 
+  if(ctx.hasError){
+    return (
+      <div className="flex  p-5 flex-row w-full h-full text-4xl text-center">
+        <h1 className="m-auto">{ctx.errorMsg}</h1>
+      </div>
+    );
+  }
+
   if (ctx.isLoading) {
     const skeletons = [];
     for (let i = 0; i < 20; i++) {
