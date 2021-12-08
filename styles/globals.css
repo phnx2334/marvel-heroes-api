@@ -6,7 +6,6 @@
 @layer base {
   body {
     @apply bg-[#06202A] text-gray-300;
- 
   }
 
   .collapsible .toggle {
@@ -26,9 +25,16 @@
     margin: 10px;
   }
 
- 
-}
+  input[type="text"] {
+    box-sizing: border-box;
+    padding-left: 0.5rem;
+  }
 
+  input::placeholder {
+    padding: 0.5rem;
+  }
+}
+/* 
 .collapsible .content-parent {
   height: 0px;
   overflow: hidden;
@@ -37,4 +43,4 @@
 
 .collapsible .content-parent .show {
   height: auto;
-}
+} */

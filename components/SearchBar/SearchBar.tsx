@@ -30,19 +30,20 @@ const SearchBar: React.FC<ISearchBarProps> = ({ changeValueHandler }) => {
 
   return (
     <div className="flex flex-col p-2 md:self-baseline md:ml-auto">
-      <p>Look for your favorite heroes</p>
-      <div className="flex">
+{/*       <p>Look for your favorite heroes</p> */}
+      <div className="flex text-black">
         <input
           value={enteredText}
           className="flex w-80"
           type="text"
           onChange={onChangeInputHandler}
+          placeholder="Look for your favorite heroes!"
         />
-        <SearchIcon className="ml-2 w-7" />
+        <SearchIcon className="ml-2 w-7 text-white" />
       </div>
 
       <div
-        className=" text-xs flex flex-row items-start p-2 pl-0 w-80"
+        className=" text-sm flex flex-row items-start p-3 pl-0 w-80"
         onChange={onChangeRadioHandler}
       >
         <label className="flex items-center mr-3">

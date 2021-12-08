@@ -4,12 +4,19 @@ import axios from "axios";
 import { characterFull } from "../../types/character";
 import Image from "next/image";
 import CharDetails from "../../components/CharDetails/CharDetails";
+import { useEffect } from "react";
 
 interface ICharacterDetailProps {
   character: characterFull;
 }
 
 const CharacterDetail: React.FC<ICharacterDetailProps> = ({ character }) => {
+
+  console.log("the character has", character)
+
+
+
+  
   return (
     <BaseLayout>
       <h1 className="m-8 text-2xl text-center sm:text-4xl">{character.name}</h1>
@@ -44,12 +51,15 @@ export const getServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
   const characterId = context.params!.characterId;
+  const alterName = context.query!.alterName
+  console.log("the alter name is", alterName)
 
   try {
     //Get from API
     const response = await axios.get("http://localhost:3000/api/character", {
       params: {
         characterId: characterId,
+        alterName:alterName
       },
     });
 
