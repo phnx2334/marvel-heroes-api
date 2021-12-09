@@ -4,6 +4,7 @@ import { characterFull } from "../../types/character";
 import Image from "next/image";
 import CharDetails from "../../components/CharDetails/CharDetails";
 import Footer from "../../components/Footer/Footer";
+import { StarIcon } from "@heroicons/react/solid";
 
 interface ICharacterDetailProps {
   character: characterFull;
@@ -16,12 +17,17 @@ const CharacterDetail: React.FC<ICharacterDetailProps> = ({ character }) => {
     ? character.description
     : "Description not available";
 
+    const storage = localStorage.getItem("favorites")
+    const favorite = storage?.includes(character.id.toString())
+
   return (
     <>
       
         <h1 className="flex  font-teko text-center justify-center py-3 items-center text-4xl text-white bg-gray-400 bg-opacity-20 h-auto sm:text-5xl md:text-6xl sm:h-20 md:h-28">
           {character.name}
+         {favorite &&  <StarIcon className="mx-3 w-[40px] text-yellow-300"/>}
         </h1>
+       
       
 
       <main className="flex flex-col items-start p-2 m-2 overscroll-y-auto sm:grid grid-cols-2 sm:p-4">
@@ -47,7 +53,7 @@ const CharacterDetail: React.FC<ICharacterDetailProps> = ({ character }) => {
           )}
         </div>
       </main>
-      <Footer/>
+      <Footer />
     </>
   );
 };
