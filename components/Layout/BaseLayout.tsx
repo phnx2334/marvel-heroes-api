@@ -1,4 +1,3 @@
-import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 
 const BaseLayout: React.FC = (props) => {
@@ -6,7 +5,6 @@ const BaseLayout: React.FC = (props) => {
     <>
       <Header />
       {props.children}
-      <Footer />
     </>
   );
 };

@@ -2,14 +2,26 @@ import React from "react";
 
 import Link from "next/link";
 import SearchBar from "../SearchBar/SearchBar";
+import { useRouter } from "next/router";
 
 interface IHeaderProps {}
 
 const Header: React.FC<IHeaderProps> = () => {
+  const router = useRouter();
+
+  const handleReload = () => {
+    if (router.pathname === "/") {
+      router.reload();
+    }
+  };
+
   return (
-    <header className="h-auto w-full bg-[#EC1D24] flex flex-col items-center justify-center md:flex-row md:p-8 md:items-start">
+    <header className="h-auto w-full bg-[#ac171c] flex flex-col items-center justify-center md:flex-row md:p-8 md:items-start">
       <Link href="/" passHref>
-        <div className="flex items-center mb-2 cursor-pointer m-3">
+        <div
+          className="flex items-center mb-2 cursor-pointer m-3"
+          onClick={handleReload}
+        >
           <h1 className="text-4xl font-permanent text-white uppercase">
             Marvel Heroes
           </h1>

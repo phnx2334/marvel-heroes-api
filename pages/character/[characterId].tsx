@@ -3,6 +3,7 @@ import axios from "axios";
 import { characterFull } from "../../types/character";
 import Image from "next/image";
 import CharDetails from "../../components/CharDetails/CharDetails";
+import Footer from "../../components/Footer/Footer";
 
 interface ICharacterDetailProps {
   character: characterFull;
@@ -46,6 +47,7 @@ const CharacterDetail: React.FC<ICharacterDetailProps> = ({ character }) => {
           )}
         </div>
       </main>
+      <Footer/>
     </>
   );
 };

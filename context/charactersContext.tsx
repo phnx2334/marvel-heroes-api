@@ -1,6 +1,8 @@
 import axios from "axios";
+import { useRouter } from "next/router";
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { CharacterMin } from "../types/character";
+
 
 interface ICharContextType {
   characterList: CharacterMin[];
@@ -9,7 +11,7 @@ interface ICharContextType {
   isLoading: boolean;
   hasError: boolean;
   errorMsg: string;
-  modal:[boolean, Dispatch<SetStateAction<boolean>>]
+  modal: [boolean, Dispatch<SetStateAction<boolean>>];
 }
 
 const CharContext = React.createContext<ICharContextType>({
@@ -18,8 +20,8 @@ const CharContext = React.createContext<ICharContextType>({
   fetchFavorites: (ids: string) => {},
   isLoading: false,
   hasError: false,
-  errorMsg:"",
-  modal:[false,()=>{}]
+  errorMsg: "",
+  modal: [false, () => {}],
 });
 
 export const CharContextProvider: React.FC = (props) => {
@@ -28,6 +30,7 @@ export const CharContextProvider: React.FC = (props) => {
   const [hasError, setHasError] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const router = useRouter();
 
   const fetchData = async (input: string, filter: string) => {
     setIsLoading(true);
@@ -47,7 +50,9 @@ export const CharContextProvider: React.FC = (props) => {
     } catch (error) {
       setIsLoading(false);
       setHasError(true);
-      setErrorMsg("No character was found")
+      setErrorMsg(
+        "Too bad! This search had no results. Want to try a different one?"
+      );
       console.log("Error fetching server side data", error);
     }
   };
@@ -74,7 +79,7 @@ export const CharContextProvider: React.FC = (props) => {
       setIsLoading(false);
     } catch (error) {
       setHasError(true);
-      setErrorMsg("No favorite characters were found")
+      setErrorMsg("No favorite characters were found");
       console.log("Error fetching server side data", error);
     }
   };
@@ -85,8 +90,8 @@ export const CharContextProvider: React.FC = (props) => {
         characterList: charactersList,
         isLoading: isLoading,
         hasError: hasError,
-        errorMsg:errorMsg,
-        modal:[modalOpen,setModalOpen],
+        errorMsg: errorMsg,
+        modal: [modalOpen, setModalOpen],
         fetchCharacters: updateCharList,
         fetchFavorites: fetchFavorites,
       }}

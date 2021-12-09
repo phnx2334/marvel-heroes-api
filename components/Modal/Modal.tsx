@@ -20,7 +20,7 @@ const Modal: React.FC<IModalProps> = ({ show, onClose, children }) => {
 
   const backdrop = (
     <div
-      className="absolute top-0 left-0 w-full h-full flex content-center items-center bg-black opacity-50"
+      className="absolute top-0 left-0 w-screen h-screen flex content-center items-center bg-black opacity-50"
       onClick={handleCloseClick}
     />
   );
@@ -28,8 +28,8 @@ const Modal: React.FC<IModalProps> = ({ show, onClose, children }) => {
   const modalContent = show ? (
     <>
       {backdrop}
-      <div className="flex flex-col w-screen h-screen items-center">
-        <div className="bg-white w-[300px] h-auto p-4 z-10 absolute top-[200px] text-black text-center">
+      <div className="flex flex-col w-screen h-4/5 items-center">
+        <div className="bg-white w-[300px] h-auto p-4 z-10 absolute top-[200px] text-black font-bold text-center">
           <div className="flex justify-end text-base">
             <a href="#" onClick={handleCloseClick}>
               x

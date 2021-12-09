@@ -4,9 +4,9 @@ import CharacterItem from "./CharacterItem";
 import { CogIcon } from "@heroicons/react/outline";
 
 const skeleton = (
-  <div className="h-[400px] w-[220px] m-5 p-0 bg-gray-300 relative">
+  <div className="h-[400px] w-[220px] m-5 p-0 bg-gray-300 relative ">
     <div className="flex animate-pulse flex-col justify-center">
-      <div id="image" className="w-[220px] bg-gray-800 h-52"></div>
+      <div id="image" className="w-[220px] bg-gray-400 h-52"></div>
       <div id="texts" className="flex flex-col space-y-3 mt-2 p-2">
         <div className="w-36 bg-gray-900 h-6"></div>
         <div className="w-24 bg-gray-900 h-6"></div>
@@ -60,7 +60,7 @@ const CharactersNav: React.FC = () => {
   return (
     <>
       <nav>
-        <div className="flex pl-1 items-center w-full text-2xl font-bold text-white bg-red-500">
+        <div className="flex pl-1 items-center justify-center w-full text-2xl font-bold text-white bg-red-500">
           <h1>Select your hero...</h1>
           <CogIcon width="20px" className="absolute right-1" onClick={()=>setShowModal(true)}/>
         </div>

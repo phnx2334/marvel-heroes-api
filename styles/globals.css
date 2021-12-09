@@ -9,6 +9,7 @@
     @apply bg-gradient-to-r from-red-800 to-[#06202A] text-gray-300;
   }
 
+
   /* width */
   ::-webkit-scrollbar {
     height: 5px;
@@ -16,12 +17,12 @@
 
   /* Track */
   ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: rgba(241, 241, 241, 0.2);
   }
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #555;
+    background: #ac171c;
   }
 
   /* Handle on hover */

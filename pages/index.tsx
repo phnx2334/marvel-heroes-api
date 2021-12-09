@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import React, { useContext, useState } from "react";
 import CharactersNav from "../components/CharactersNav/CharactersNav";
+import Footer from "../components/Footer/Footer";
 import Modal from "../components/Modal/Modal";
 import CharContext from "../context/charactersContext";
 
@@ -28,19 +29,19 @@ const Home: NextPage = () => {
         show={showModal}
       >
         <button
-          className="border-2 text-sm p-2 m-2 bg-gray-800 text-white"
+          className="border-2 text-sm p-2 m-2 bg-gray-800 hover:bg-gray-500 text-white"
           onClick={() => clearStorage("favorites")}
         >
           Reset Favorites
         </button>
         <button
-          className="border-2 text-sm p-2 m-2 bg-gray-800 text-white"
+          className="border-2 text-sm p-2 m-2 bg-gray-800 hover:bg-gray-500 text-white"
           onClick={() => clearStorage("names")}
         >
           Reset Names
         </button>
         <button
-          className="border-2 text-sm p-2 m-2 bg-gray-800 text-white"
+          className="border-2 text-sm p-2 m-2 bg-gray-800 hover:bg-gray-500 text-white"
           onClick={() => clearStorage("deleted")}
         >
           Reset Deleted
@@ -61,6 +62,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <CharactersNav />
+      <Footer/>
     </div>
   );
 };

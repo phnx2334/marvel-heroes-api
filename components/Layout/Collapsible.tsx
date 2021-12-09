@@ -14,7 +14,7 @@ const Collapsible: React.FC<ICollapsibleProps> = (props) => {
     <div className="relative mw-[370px] m-0 sm:w-full">
       <div
         className={`flex items-center w-full h-12 pl-5 cursor-pointer ${
-          isOpen ? "bg-red-600" : "bg-gray-700"
+          isOpen ? "bg-[#ac171c]" : "bg-gray-700"
         }`}
         onClick={() => setIsOpen(!isOpen)}
       >
