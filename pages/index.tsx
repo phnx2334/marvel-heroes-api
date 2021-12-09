@@ -20,7 +20,7 @@ const Home: NextPage = () => {
   };
 
   return (
-    <div>
+    <>
       <Modal
         onClose={() => {
           setShowModal(false);
@@ -63,7 +63,7 @@ const Home: NextPage = () => {
       </Head>
       <CharactersNav />
       <Footer/>
-    </div>
+    </>
   );
 };
 

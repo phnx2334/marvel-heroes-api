@@ -17,18 +17,15 @@ const CharacterDetail: React.FC<ICharacterDetailProps> = ({ character }) => {
     ? character.description
     : "Description not available";
 
-    const storage = localStorage.getItem("favorites")
-    const favorite = storage?.includes(character.id.toString())
+  const storage = localStorage.getItem("favorites");
+  const favorite = storage?.includes(character.id.toString());
 
   return (
     <>
-      
-        <h1 className="flex  font-teko text-center justify-center py-3 items-center text-4xl text-white bg-gray-400 bg-opacity-20 h-auto sm:text-5xl md:text-6xl sm:h-20 md:h-28">
-          {character.name}
-         {favorite &&  <StarIcon className="mx-3 w-[40px] text-yellow-300"/>}
-        </h1>
-       
-      
+      <h1 className="flex  font-teko text-center justify-center py-3 items-center text-4xl text-white bg-gray-400 bg-opacity-20 h-auto sm:text-5xl md:text-6xl sm:h-20 md:h-28">
+        {character.name}
+        {favorite && <StarIcon className="mx-3 w-[40px] text-yellow-300" />}
+      </h1>
 
       <main className="flex flex-col items-start p-2 m-2 overscroll-y-auto sm:grid grid-cols-2 sm:p-4">
         <div className="max-w-full m-auto w-80 sm:w-full">

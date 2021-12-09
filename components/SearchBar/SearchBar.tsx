@@ -1,4 +1,5 @@
 import { SearchIcon } from "@heroicons/react/outline";
+import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 import CharContext from "../../context/charactersContext";
 
@@ -8,6 +9,12 @@ const SearchBar: React.FC<ISearchBarProps> = () => {
   const [enteredText, setenteredText] = useState("");
   const [filter, setFilter] = useState("characters");
   const ctx = useContext(CharContext);
+  const router = useRouter();
+  const pathname = router.pathname;
+
+  useEffect(() => {
+    ctx.fetchCharacters(enteredText, filter);
+  }, [pathname]);
 
   const onChangeInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setenteredText(e.currentTarget.value);
@@ -19,12 +26,22 @@ const SearchBar: React.FC<ISearchBarProps> = () => {
   };
 
   const makeSearchEnter = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
+    if (pathname === "/") {
       ctx.fetchCharacters(enteredText, filter);
+    } else {
+      router.push("/");
     }
   };
 
-  const makeSearchClick = (e: React.MouseEvent<HTMLInputElement>) => {
+  const makeSearchLensClick = () => {
+    if (e.key === "Enter" && pathname === "/") {
+      ctx.fetchCharacters(enteredText, filter);
+    } else {
+      router.push("/");
+    }
+  };
+
+  const makeSearchFilterClick = (e: React.MouseEvent<HTMLInputElement>) => {
     ctx.fetchCharacters(enteredText, e.currentTarget.value);
   };
 
@@ -47,7 +64,7 @@ const SearchBar: React.FC<ISearchBarProps> = () => {
         />
         <SearchIcon
           className="ml-2 w-7 text-white cursor-pointer"
-          onClick={() => ctx.fetchCharacters(enteredText, filter)}
+          onClick={makeSearchLensClick}
         />
       </div>
 
@@ -60,7 +77,7 @@ const SearchBar: React.FC<ISearchBarProps> = () => {
             type="radio"
             value="characters"
             name="filter"
-            onClick={makeSearchClick}
+            onClick={makeSearchFilterClick}
             defaultChecked
           />
           Characters
@@ -70,7 +87,7 @@ const SearchBar: React.FC<ISearchBarProps> = () => {
             type="radio"
             value="comics"
             name="filter"
-            onClick={makeSearchClick}
+            onClick={makeSearchFilterClick}
           />
           Comics
         </label>
@@ -79,7 +96,7 @@ const SearchBar: React.FC<ISearchBarProps> = () => {
             type="radio"
             value="stories"
             name="filter"
-            onClick={makeSearchClick}
+            onClick={makeSearchFilterClick}
           />
           Stories
         </label>
@@ -88,7 +105,7 @@ const SearchBar: React.FC<ISearchBarProps> = () => {
             type="radio"
             value="series"
             name="filter"
-            onClick={makeSearchClick}
+            onClick={makeSearchFilterClick}
           />
           Series
         </label>
