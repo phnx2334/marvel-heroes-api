@@ -174,7 +174,7 @@ const CharacterItem: React.FC<ICharactersItemProps> = ({ character }) => {
       passHref
     >
       <div
-        className={`flex flex-col relative border-2 items-center m-1 max-h-[400px]  max-w-min cursor-pointer group hover:scale-105 hover:z-50 ${
+        className={`flex flex-col relative border-2 items-center m-1 max-h-[400px] max-w-min cursor-pointer group hover:scale-105 hover:z-50 ${
           deleted && "hidden"
         }`}
       >

@@ -18,7 +18,7 @@ const CharacterDetail: React.FC<ICharacterDetailProps> = ({ character }) => {
   return (
     <>
       
-        <h1 className="flex  font-teko justify-center items-center text-4xl text-white bg-gray-400 bg-opacity-20 h-14 sm:text-5xl md:text-6xl sm:h-20 md:h-28">
+        <h1 className="flex  font-teko text-center justify-center py-3 items-center text-4xl text-white bg-gray-400 bg-opacity-20 h-auto sm:text-5xl md:text-6xl sm:h-20 md:h-28">
           {character.name}
         </h1>
       

@@ -43,7 +43,7 @@ const SearchBar: React.FC<ISearchBarProps> = () => {
           type="text"
           onChange={onChangeInputHandler}
           onKeyDown={makeSearchEnter}
-          placeholder="Look for your favorite heroes!"
+          placeholder="Type a name to start"
         />
         <SearchIcon
           className="ml-2 w-7 text-white cursor-pointer"

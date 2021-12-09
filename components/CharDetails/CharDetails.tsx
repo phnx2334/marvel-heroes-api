@@ -16,7 +16,7 @@ const CharDetails: React.FC<ICharDetailsProps> = ({ items, type }) => {
           const url = item.urls.filter((url) => url.type === "detail")[0].url;
           return (
             <Link key={item.title} href={url} passHref>
-              <div className="flex flex-col items-center m-2 cursor-pointer">
+              <div className="flex flex-col items-center m-2 cursor-pointer bg-gray-800 bg-opacity-70 p-2 ">
                 <Image
                   src={item.image}
                   alt={item.title}
@@ -24,7 +24,7 @@ const CharDetails: React.FC<ICharDetailsProps> = ({ items, type }) => {
                   height={60}
                   width={60}
                 />
-                <p className="max-w-sm mt-1 text-xs text-center text-gray-800 whitespace-pre-wrap">
+                <p className="max-w-sm mt-1 text-xs text-center text-white whitespace-pre-wrap">
                   {item.title}
                 </p>
               </div>

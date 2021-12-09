@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { CharacterMin } from "../types/character";
 
 interface ICharContextType {
@@ -9,6 +9,7 @@ interface ICharContextType {
   isLoading: boolean;
   hasError: boolean;
   errorMsg: string;
+  modal:[boolean, Dispatch<SetStateAction<boolean>>]
 }
 
 const CharContext = React.createContext<ICharContextType>({
@@ -17,13 +18,15 @@ const CharContext = React.createContext<ICharContextType>({
   fetchFavorites: (ids: string) => {},
   isLoading: false,
   hasError: false,
-  errorMsg:""
+  errorMsg:"",
+  modal:[false,()=>{}]
 });
 
 export const CharContextProvider: React.FC = (props) => {
   const [charactersList, setCharactersList] = useState<CharacterMin[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
   const fetchData = async (input: string, filter: string) => {
@@ -83,6 +86,7 @@ export const CharContextProvider: React.FC = (props) => {
         isLoading: isLoading,
         hasError: hasError,
         errorMsg:errorMsg,
+        modal:[modalOpen,setModalOpen],
         fetchCharacters: updateCharList,
         fetchFavorites: fetchFavorites,
       }}

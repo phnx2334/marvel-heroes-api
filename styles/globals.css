@@ -5,7 +5,8 @@
 
 @layer base {
   body {
-    @apply bg-[#06202A] text-gray-300;
+    /* @apply bg-[#06202A] text-gray-300; */
+    @apply bg-gradient-to-r from-red-800 to-[#06202A] text-gray-300;
   }
 
   /* width */

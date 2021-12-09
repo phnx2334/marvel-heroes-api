@@ -1,15 +1,53 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useState } from "react";
-import Header from "../components/Header/Header";
+import React, { useContext, useState } from "react";
 import CharactersNav from "../components/CharactersNav/CharactersNav";
-import axios from "axios";
-import { CharacterMin } from "../types/character";
-import Footer from "../components/Footer/Footer";
+import Modal from "../components/Modal/Modal";
+import CharContext from "../context/charactersContext";
 
 const Home: NextPage = () => {
+  const ctx = useContext(CharContext);
+  const [showModal, setShowModal] = ctx.modal;
+  const [resetFeedback, setResetFeedback] = useState("");
+
+  const clearStorage = (type: string) => {
+    localStorage.removeItem(type);
+    setResetFeedback("Done!");
+    setTimeout(() => {
+      setResetFeedback("");
+    }, 1000);
+  };
+
   return (
     <div>
+      <Modal
+        onClose={() => {
+          setShowModal(false);
+          window.location.reload();
+        }}
+        show={showModal}
+      >
+        <button
+          className="border-2 text-sm p-2 m-2 bg-gray-800 text-white"
+          onClick={() => clearStorage("favorites")}
+        >
+          Reset Favorites
+        </button>
+        <button
+          className="border-2 text-sm p-2 m-2 bg-gray-800 text-white"
+          onClick={() => clearStorage("names")}
+        >
+          Reset Names
+        </button>
+        <button
+          className="border-2 text-sm p-2 m-2 bg-gray-800 text-white"
+          onClick={() => clearStorage("deleted")}
+        >
+          Reset Deleted
+        </button>
+
+        <div>{resetFeedback}</div>
+      </Modal>
       <Head>
         <title>Marvel Heroes!</title>
         <meta
