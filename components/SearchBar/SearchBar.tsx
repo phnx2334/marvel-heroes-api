@@ -13,20 +13,27 @@ const SearchBar: React.FC<ISearchBarProps> = () => {
   const pathname = router.pathname;
 
   useEffect(() => {
-    ctx.fetchCharacters(enteredText, filter);
-  }, [pathname]);
+    if (pathname === "/") {
+      const timeoutid = setTimeout(() => {
+        ctx.fetchCharacters(enteredText, filter);
+      }, 500);
+
+      return () => {
+        clearTimeout(timeoutid);
+      };
+    }
+  }, [enteredText]);
 
   const onChangeInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setenteredText(e.currentTarget.value);
   };
 
   const onChangeRadioHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("selected", e.target.value);
     setFilter(e.target.value);
   };
 
   const makeSearchEnter = (e: React.KeyboardEvent) => {
-    if (pathname === "/") {
+    if (pathname === "/" && e.key === "Enter") {
       ctx.fetchCharacters(enteredText, filter);
     } else {
       router.push("/");
@@ -34,7 +41,7 @@ const SearchBar: React.FC<ISearchBarProps> = () => {
   };
 
   const makeSearchLensClick = () => {
-    if (e.key === "Enter" && pathname === "/") {
+    if (pathname === "/") {
       ctx.fetchCharacters(enteredText, filter);
     } else {
       router.push("/");

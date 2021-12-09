@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { CharacterMin } from "../types/character";
 
-
 interface ICharContextType {
   characterList: CharacterMin[];
   fetchCharacters: (newText: string, filter: string) => void;
@@ -42,8 +41,6 @@ export const CharContextProvider: React.FC = (props) => {
           filter: filter,
         },
       });
-
-      console.log("the response was", response.data);
 
       setCharactersList(response.data);
       setIsLoading(false);

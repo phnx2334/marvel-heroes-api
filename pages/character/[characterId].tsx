@@ -11,8 +11,6 @@ interface ICharacterDetailProps {
 }
 
 const CharacterDetail: React.FC<ICharacterDetailProps> = ({ character }) => {
-  console.log("the character has", character);
-
   const description = character.description
     ? character.description
     : "Description not available";
@@ -22,7 +20,7 @@ const CharacterDetail: React.FC<ICharacterDetailProps> = ({ character }) => {
 
   return (
     <>
-      <h1 className="flex  font-teko text-center justify-center py-3 items-center text-4xl text-white bg-gray-400 bg-opacity-20 h-auto sm:text-5xl md:text-6xl sm:h-20 md:h-28">
+      <h1 className="flex  font-teko text-center  align-top py-3 items-center  justify-center text-4xl text-white bg-gray-400 bg-opacity-20 h-auto sm:text-5xl md:text-6xl sm:h-20 md:h-28">
         {character.name}
         {favorite && <StarIcon className="mx-3 w-[40px] text-yellow-300" />}
       </h1>
@@ -60,7 +58,6 @@ export const getServerSideProps = async (
 ) => {
   const characterId = context.params!.characterId;
   const alterName = context.query!.alterName;
-  console.log("the alter name is", alterName);
 
   try {
     //Get from API

@@ -4,7 +4,7 @@ import CharacterItem from "./CharacterItem";
 import { CogIcon } from "@heroicons/react/outline";
 
 const skeleton = (
-  <div className="h-[400px] w-[220px] m-5 p-0 bg-gray-300 relative ">
+  <div className="h-[400px] w-[220px] m-5 p-0 bg-gray-300 relative opacity-50 ">
     <div className="flex animate-pulse flex-col justify-center">
       <div id="image" className="w-[220px] bg-gray-400 h-52"></div>
       <div id="texts" className="flex flex-col space-y-3 mt-2 p-2">

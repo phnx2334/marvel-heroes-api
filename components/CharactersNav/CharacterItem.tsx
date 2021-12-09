@@ -19,7 +19,6 @@ const initFavStorage = (id: number) => {
   const lstorage = localStorage.getItem("favorites");
 
   if (lstorage === null) {
-    console.log("created local storage for favorites");
     localStorage.setItem("favorites", "");
     return false;
   }
@@ -36,7 +35,6 @@ const initDeletedStorage = (id: number) => {
   const lstorage = localStorage.getItem("deleted");
 
   if (lstorage === null) {
-    console.log("created local storage for deleted");
     localStorage.setItem("deleted", "");
     return false;
   }
@@ -53,7 +51,6 @@ const initNameStorage = (id: string) => {
   const lstorage = localStorage.getItem("names");
 
   if (lstorage === null) {
-    console.log("created local storage for names");
     localStorage.setItem("names", "[]");
     return "";
   }
@@ -157,7 +154,6 @@ const CharacterItem: React.FC<ICharactersItemProps> = ({ character }) => {
   };
 
   const onKeyPressHandler = (e: React.KeyboardEvent) => {
-    console.log("the pressed key is", e.key);
     if (e.key === "Enter") {
       setIsEditable(false);
     }
@@ -227,6 +223,7 @@ const CharacterItem: React.FC<ICharactersItemProps> = ({ character }) => {
             onKeyDown={onKeyPressHandler}
             onClick={(e) => e.preventDefault()}
             maxLength={40}
+            autoFocus
           />
         ) : (
           <h2 className="max-w-sm mt-1 text-2xl px-2 text-center text-white whitespace-pre-wrap group-hover:font-bold active:text-red-500">
