@@ -2,6 +2,8 @@ import axios, { AxiosResponse } from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
 import buildUrl from "../../util/api";
 
+
+//Returns list of favorite characters
 export default async function favoritesCharactersHandler(
   req: NextApiRequest,
   res: NextApiResponse

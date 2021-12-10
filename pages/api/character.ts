@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import buildUrl from "../../util/api";
 import { CharacterFull, CharacterSinglePage, ComicSeries } from "../../types/character";
 
+//Returns a single character page information
 export default async function characterHandler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -22,6 +23,7 @@ export default async function characterHandler(
       const comicsReq = axios.get(comicsUrl);
       const seriesReq = axios.get(seriesUrl);
 
+      //Execute all requests at once
       axios
         .all([charReq, comicsReq, seriesReq])
         .then(
@@ -67,6 +69,7 @@ export default async function characterHandler(
   }
 }
 
+//Clean the results leaving only the relevant needed info
 const cleanResults = (items: ComicSeries[]) => {
   if (!(items.length > 0)) return [];
 

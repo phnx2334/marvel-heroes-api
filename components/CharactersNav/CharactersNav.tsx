@@ -3,6 +3,7 @@ import CharContext from "../../context/charactersContext";
 import CharacterItem from "./CharacterItem";
 import { CogIcon } from "@heroicons/react/outline";
 
+//Skeleton card to render while loading info
 const skeleton = (id: number) => {
   return (
     <div
@@ -59,6 +60,7 @@ const CharactersNav: React.FC = () => {
     );
   }
 
+  //Initial message
   if (!ctx.characterList.length) {
     return (
       <div className="flex  p-5 flex-row w-full h-full text-4xl text-center">

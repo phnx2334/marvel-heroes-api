@@ -22,6 +22,8 @@ const CharContext = React.createContext<ICharContextType>({
   modal: [false, () => {}],
 });
 
+
+//Context handles all the fetching operations for the lists of characters. Single character page is server side rendered.
 export const CharContextProvider: React.FC = (props) => {
   const [charactersList, setCharactersList] = useState<CharacterMinImg[]>([]);
   const [isLoading, setIsLoading] = useState(false);

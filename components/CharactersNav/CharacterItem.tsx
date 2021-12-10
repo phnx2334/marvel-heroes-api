@@ -5,7 +5,6 @@ import Link from "next/link";
 import { StarIcon, PencilAltIcon } from "@heroicons/react/outline";
 import { StarIcon as StarIconSolid, TrashIcon } from "@heroicons/react/solid";
 
-
 interface ICharactersItemProps {
   character: CharacterMinImg;
 }
@@ -16,7 +15,7 @@ type nameStorage = {
 };
 
 const initFavStorage = (id: number) => {
-  //If the favorites do not exist, I create it
+  //Create storage if it doesn't exist
   const lstorage = localStorage.getItem("favorites");
 
   if (lstorage === null) {
@@ -24,6 +23,7 @@ const initFavStorage = (id: number) => {
     return false;
   }
 
+  //If found set favorites to true
   if (lstorage.includes(id.toString())) {
     return true;
   } else {
@@ -32,7 +32,7 @@ const initFavStorage = (id: number) => {
 };
 
 const initDeletedStorage = (id: number) => {
-  //If the deleted item does not exist, I create it
+  //Create storage if it doesn't exist
   const lstorage = localStorage.getItem("deleted");
 
   if (lstorage === null) {
@@ -40,6 +40,7 @@ const initDeletedStorage = (id: number) => {
     return false;
   }
 
+  //If found set deleted to true
   if (lstorage.includes(id.toString())) {
     return true;
   } else {
@@ -48,7 +49,7 @@ const initDeletedStorage = (id: number) => {
 };
 
 const initNameStorage = (id: string) => {
-  //If the names do not exist, I create it
+  //Create storage if it doesn't exist
   const lstorage = localStorage.getItem("names");
 
   if (lstorage === null) {
@@ -60,6 +61,7 @@ const initNameStorage = (id: string) => {
 
   const index = items.findIndex((item) => item.id === id);
 
+  //If found return it
   if (index !== -1) {
     return items[index].name;
   } else {

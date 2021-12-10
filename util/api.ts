@@ -19,6 +19,7 @@ export type filters =
   | "series"
   | "stories";
 
+  //Returns a single URL built based on the selected option
 const buildUrl = (filter: filters, value: string) => {
   let url = "";
 

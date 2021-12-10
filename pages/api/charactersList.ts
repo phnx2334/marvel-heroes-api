@@ -10,7 +10,7 @@ import buildUrl, { filters } from "../../util/api";
 type characterData = { id: string; name: string };
 type characterDataItem = { resourceURI: string; name: string };
 
-//Get specific character with given name
+//Returns lists of character based on selected filter
 export default async function charactersListHandler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -98,7 +98,6 @@ const getCharactersList = (data: MediaCharacter[], callback: any) => {
   });
 
   //Make all requests at once
-
   axios
     .all(requests)
     .then(

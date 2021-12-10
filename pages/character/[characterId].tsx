@@ -12,6 +12,7 @@ interface ICharacterDetailProps {
   character: CharacterSinglePage;
 }
 
+//Renders the page on the server side every time it is requested
 const CharacterDetail: React.FC<ICharacterDetailProps> = ({ character }) => {
   const description = character.description
     ? character.description
@@ -21,6 +22,7 @@ const CharacterDetail: React.FC<ICharacterDetailProps> = ({ character }) => {
 
   const [isFavorite, setIsFavorite] = useState<boolean | null>(null);
 
+  //Check wether it is marked as favorite or not
   useEffect(() => {
     const params = router.query;
     const storage = localStorage.getItem("favorites");
@@ -73,7 +75,6 @@ export const getServerSideProps = async (
   const alterName = context.query!.alterName;
 
   try {
-    //Get from API
     const url = process.env.PUBLIC_URL || "http://localhost:3000";
     const response = await axios.get(`${url}api/character`, {
       params: {
