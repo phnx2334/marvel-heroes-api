@@ -1,4 +1,4 @@
-export interface Character {
+export interface CharacterFull {
   id: number;
   name: string;
   description: string;
@@ -19,12 +19,20 @@ export interface CharacterMin {
   id: number;
   name: string;
   description: string;
-  image: string;
-  apiPage: string;
-  resource: string;
+  thumbnail: {
+    extension: string;
+    path: string;
+  };
 }
 
-export interface characterFull {
+export interface CharacterMinImg {
+  id: number;
+  name: string;
+  description: string;
+  image: string;
+}
+
+export interface CharacterSinglePage {
   id: number;
   name: string;
   description: string;

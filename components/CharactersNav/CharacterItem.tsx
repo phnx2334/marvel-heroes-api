@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import { CharacterMin } from "../../types/character";
+import { CharacterMinImg } from "../../types/character";
 import Link from "next/link";
 import { StarIcon, PencilAltIcon } from "@heroicons/react/outline";
 import { StarIcon as StarIconSolid, TrashIcon } from "@heroicons/react/solid";
 
 
 interface ICharactersItemProps {
-  character: CharacterMin;
+  character: CharacterMinImg;
 }
 
 type nameStorage = {

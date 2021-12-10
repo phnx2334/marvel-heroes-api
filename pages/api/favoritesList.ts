@@ -1,5 +1,6 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
+import { CharacterMin } from "../../types/character";
 import buildUrl from "../../util/api";
 
 export default async function favoritesCharactersHandler(
@@ -21,7 +22,7 @@ export default async function favoritesCharactersHandler(
 
   if (method === "GET") {
     //For each character push a request to be made to the array
-    const requests: any = [];
+    const requests: Promise<AxiosResponse<any, any>>[] = [];
 
     idArray.map((characterId: string) => {
       const characterUrl = buildUrl("character", characterId);
@@ -30,11 +31,10 @@ export default async function favoritesCharactersHandler(
     });
 
     //Make all requests at once
-    let results: any = [];
     axios
       .all(requests)
       .then(
-        (results = axios.spread((...responses) => {
+        axios.spread((...responses) => {
           //For each response
           const responseData = responses.map((response: any) => {
             const { id, name, description, thumbnail } =
@@ -56,7 +56,7 @@ export default async function favoritesCharactersHandler(
           });
 
           res.status(200).send(responseData);
-        }))
+        })
       )
       .catch((errors) => {
         console.log("Error fetching filtered character data", errors);
