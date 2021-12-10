@@ -6,6 +6,7 @@ import CharDetails from "../../components/CharDetails/CharDetails";
 import Footer from "../../components/Footer/Footer";
 import { StarIcon } from "@heroicons/react/solid";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 interface ICharacterDetailProps {
   character: characterFull;
@@ -16,15 +17,19 @@ const CharacterDetail: React.FC<ICharacterDetailProps> = ({ character }) => {
     ? character.description
     : "Description not available";
 
+  const router = useRouter();
+  
+
   const [isFavorite, setIsFavorite] = useState<boolean | null>(null);
 
   useEffect(() => {
+    const params = router.query;
     const storage = localStorage.getItem("favorites");
-    const favorite = storage?.includes(character.id.toString());
+    const favorite = storage?.includes(params.id as string);
     if (favorite) {
       setIsFavorite(favorite);
     }
-  }, [character.id]);
+  }, []);
 
   return (
     <>
