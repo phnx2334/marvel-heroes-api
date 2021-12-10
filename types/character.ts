@@ -15,16 +15,6 @@ export interface CharacterFull {
   series: any[];
 }
 
-export interface CharacterMin {
-  id: number;
-  name: string;
-  description: string;
-  thumbnail: {
-    extension: string;
-    path: string;
-  };
-}
-
 export interface CharacterMinImg {
   id: number;
   name: string;

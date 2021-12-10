@@ -2,7 +2,6 @@ import axios, { AxiosResponse } from "axios";
 import type { NextApiRequest, NextApiResponse } from "next";
 import {
   CharacterFull,
-  CharacterMin,
   CharacterMinImg,
   MediaCharacter,
 } from "../../types/character";

@@ -1,6 +1,5 @@
 import axios, { AxiosResponse } from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
-import { CharacterMin } from "../../types/character";
 import buildUrl from "../../util/api";
 
 export default async function favoritesCharactersHandler(
