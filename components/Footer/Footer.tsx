@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <div
       className={`flex p-1 justify-center text-xs text-white bg-[#ac171c] w-full ${
-        path === "/" ? "fixed bottom-0" : ""
+        path === "/" ? "mt-5" : ""
       }`}
     >
       <a href="http://marvel.com">{footerText}</a>
