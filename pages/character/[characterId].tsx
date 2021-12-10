@@ -75,7 +75,7 @@ export const getServerSideProps = async (
 
   try {
     //Get from API
-    const response = await axios.get("http://localhost:3000/api/character", {
+    const response = await axios.get("https://marvel-heroes-e5khe5j26-phnx2334.vercel.app/api/character", {
       params: {
         characterId: characterId,
         alterName: alterName,
