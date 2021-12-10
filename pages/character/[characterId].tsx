@@ -23,6 +23,7 @@ const CharacterDetail: React.FC<ICharacterDetailProps> = ({ character }) => {
   const [isFavorite, setIsFavorite] = useState<boolean | null>(null);
 
   useEffect(() => {
+    console.log("the character has", character)
     const params = router.query;
     const storage = localStorage.getItem("favorites");
     const favorite = storage?.includes(params.id as string);
