@@ -74,7 +74,8 @@ export const getServerSideProps = async (
 
   try {
     //Get from API
-    const response = await axios.get("http://localhost:3000/api/character", {
+    const url =  process.env.PUBLIC_URL || "http://localhost:3000";
+    const response = await axios.get(`${url}api/character`, {
       params: {
         characterId: characterId,
         alterName: alterName,
