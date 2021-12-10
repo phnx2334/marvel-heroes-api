@@ -8,7 +8,7 @@ const Footer = () => {
   const path = router.pathname;
   const footerText = "Data provided by Marvel. © 2021 MARVEL";
   const position =
-    path === "/" && !(ctx.characterList.length > 0) ? "fixed bottom-0" : "sm:mt-5";
+    path === "/" && !(ctx.characterList.length > 0) ? "fixed bottom-0" : "md:mt-5";
   return (
     <div
       className={`flex p-1 justify-center text-xs text-white bg-[#ac171c] w-full ${position}`}
