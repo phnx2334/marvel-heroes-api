@@ -1,9 +1,10 @@
+import React, { useState } from "react";
 import Image from "next/image";
 import { CharacterMin } from "../../types/character";
 import Link from "next/link";
 import { StarIcon, PencilAltIcon } from "@heroicons/react/outline";
 import { StarIcon as StarIconSolid, TrashIcon } from "@heroicons/react/solid";
-import React, { useState } from "react";
+
 
 interface ICharactersItemProps {
   character: CharacterMin;
@@ -170,11 +171,11 @@ const CharacterItem: React.FC<ICharactersItemProps> = ({ character }) => {
       passHref
     >
       <div
-        className={`flex flex-col relative border-2 items-center m-1 max-h-[400px] max-w-min cursor-pointer group hover:scale-105 hover:z-50 ${
+        className={`flex flex-col relative border-2 items-center m-1 max-h-[600px] max-w-min cursor-pointer group hover:scale-105 hover:z-50 ${
           deleted && "hidden"
         }`}
       >
-        <div className="p0 m-0   min-w-[220px] max-w-[220px]   max-h-[220px]">
+        <div className="p0 m-0 min-w-[300px] max-w-[300px]   max-h-[300px]">
           <Image
             src={character.image}
             alt="Hero"
@@ -217,7 +218,7 @@ const CharacterItem: React.FC<ICharactersItemProps> = ({ character }) => {
         {isEditable ? (
           <input
             type="text"
-            className="max-w-sm bg-gray-400 text-opacity-100 bg-opacity-10 text-white mt-2"
+            className="max-w-sm bg-gray-400 text-opacity-100 bg-opacity-10 text-white m-auto"
             onChange={modifyNameStorage}
             value={alterName}
             onKeyDown={onKeyPressHandler}
@@ -226,15 +227,12 @@ const CharacterItem: React.FC<ICharactersItemProps> = ({ character }) => {
             autoFocus
           />
         ) : (
-          <h2 className="max-w-sm mt-1 text-2xl px-2 text-center text-white whitespace-pre-wrap group-hover:font-bold active:text-red-500">
+          <h2 className="max-w-sm m-auto mb-5 text-2xl px-2 text-center text-white whitespace-pre-wrap group-hover:font-bold active:text-red-500">
             {alterName !== "" ? alterName : character.name}
           </h2>
         )}
 
-        <p className="flex truncate max-h-40  p-4  mb-2 text-justify text-base whitespace-pre-wrap">
-          {description}
-        </p>
-        <div className="flex absolute bottom-0 justify-center w-full text-base font-bold text-white bg-red-500">
+        <div className="flex flex-col text-center  self-end mt-auto justify-center w-full text-base font-bold text-white bg-red-500">
           <p>Find out more!</p>
         </div>
       </div>

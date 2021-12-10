@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useRouter } from "next/router";
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { CharacterMin } from "../types/character";
 
@@ -29,7 +28,6 @@ export const CharContextProvider: React.FC = (props) => {
   const [hasError, setHasError] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-  const router = useRouter();
 
   const fetchData = async (input: string, filter: string) => {
     setIsLoading(true);

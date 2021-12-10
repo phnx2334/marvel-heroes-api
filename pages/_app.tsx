@@ -5,7 +5,6 @@ import BaseLayout from "../components/Layout/BaseLayout";
 import { CharContextProvider } from "../context/charactersContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
-
   return (
     <CharContextProvider>
       <BaseLayout>

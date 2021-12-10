@@ -1,48 +1,39 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useRef } from "react";
 import CharContext from "../../context/charactersContext";
 import CharacterItem from "./CharacterItem";
 import { CogIcon } from "@heroicons/react/outline";
 
-/* import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/outline"; */
-
-const skeleton = (
-  <div className="h-[400px] w-[220px] m-5 p-0 bg-gray-300 relative opacity-50 ">
-    <div className="flex animate-pulse flex-col justify-center">
-      <div id="image" className="w-[220px] bg-gray-400 h-52"></div>
-      <div id="texts" className="flex flex-col space-y-3 mt-2 p-2">
-        <div className="w-36 bg-gray-900 h-6"></div>
-        <div className="w-24 bg-gray-900 h-6"></div>
-        <div className="w-36 bg-gray-900 h-6"></div>
+const skeleton = (id: number) => {
+  return (
+    <div
+      key={id}
+      className="h-[450px] w-[600px] m-5 p-0 bg-gray-300 relative opacity-50"
+    >
+      <div className="flex animate-pulse flex-col justify-center">
+        <div id="image" className="w-[300px] bg-gray-400 h-[300px]"></div>
+        <div className="w-full bg-gray-900 h-6"></div>
+        <div
+          id="texts"
+          className="flex flex-col space-y-3 mt-2 p-2 items-center"
+        >
+          <div className="w-52 bg-gray-900 h-6"></div>
+          <div className="w-24 bg-gray-900 h-6"></div>
+        </div>
+        <div
+          id="charFooter"
+          className="w-full absolute bottom-0 bg-gray-800 h-6 p-0"
+        ></div>
       </div>
-      <div
-        id="charFooter"
-        className="w-full absolute bottom-0 bg-gray-800 h-6 p-0"
-      ></div>
     </div>
-  </div>
-);
+  );
+};
 
 const CharactersNav: React.FC = () => {
   const ctx = useContext(CharContext);
   const [_, setShowModal] = ctx.modal;
   const charsLen = ctx.characterList.length;
 
-  /* const [isScrollable, setIsScrollable] = useState(false); */
-
   const resultDiv = useRef<HTMLDivElement | null>(null);
- /*  const currentDiv = resultDiv.current */
-
-/*   useEffect(() => {
-
-    console.log("div durrent",resultDiv.current )
-    if (currentDiv) {
-      const isScrollable =
-        resultDiv.current!.scrollWidth > resultDiv.current!.clientWidth;
-
-        console.log("is scrollable", isScrollable)
-      setIsScrollable(isScrollable);
-    }
-  }, [currentDiv]); */
 
   if (ctx.hasError) {
     return (
@@ -55,7 +46,7 @@ const CharactersNav: React.FC = () => {
   if (ctx.isLoading) {
     const skeletons = [];
     for (let i = 0; i < 20; i++) {
-      skeletons.push(skeleton);
+      skeletons.push(skeleton(i));
     }
     return (
       <>
@@ -76,14 +67,6 @@ const CharactersNav: React.FC = () => {
     );
   }
 
-  const scroll = (side: string) => {
-    if (side === "left") {
-      resultDiv.current!.scrollLeft -= 235;
-    } else {
-      resultDiv.current!.scrollLeft += 235;
-    }
-  };
-
   return (
     <>
       <nav>
@@ -95,21 +78,6 @@ const CharactersNav: React.FC = () => {
             onClick={() => setShowModal(true)}
           />
         </div>
-
-        {/* {isScrollable && (
-          <span className="hidden items-center justify-center m-4 sm:flex">
-            <ChevronLeftIcon
-              width={40}
-              onClick={() => scroll("left")}
-              className="transform ease-in-out delay-150  hover:scale-125 duration-300"
-            />
-            <ChevronRightIcon
-              width={40}
-              onClick={() => scroll("right")}
-              className="transform ease-in-out delay-150  hover:scale-125 duration-300"
-            />
-          </span>
-        )} */}
 
         <div
           className={`flex p-6 space-x-10 overflow-x-scroll text-2xl px10 whitespace-nowrap ${

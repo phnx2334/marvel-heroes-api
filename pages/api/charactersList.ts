@@ -1,9 +1,6 @@
 import axios from "axios";
 import type { NextApiRequest, NextApiResponse } from "next";
-import {
-  Character,
-  MediaCharacter,
-} from "../../types/character";
+import { Character, MediaCharacter } from "../../types/character";
 import buildUrl, { filters } from "../../util/api";
 
 //Get specific character with given name

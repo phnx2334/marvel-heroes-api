@@ -8,7 +8,7 @@ export default async function characterHandler(
   res: NextApiResponse
 ) {
   const {
-    query: { characterId,alterName },
+    query: { characterId, alterName },
     method,
   } = req;
 
@@ -40,7 +40,7 @@ export default async function characterHandler(
 
               const responseData: characterFull = {
                 id: id,
-                name: alterName as string ||name.trim(),
+                name: (alterName as string) || name.trim(),
                 description: description.trim(),
                 image: thumbnail
                   ? `${thumbnail.path}.${thumbnail.extension}`

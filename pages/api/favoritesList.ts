@@ -15,7 +15,7 @@ export default async function favoritesCharactersHandler(
 
   if (typeof charactersId === "string" && charactersId.length > 0) {
     idArray = charactersId.split(",");
-  }else{
+  } else {
     res.status(404).send(`No favorites found`);
   }
 

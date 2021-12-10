@@ -16,7 +16,7 @@ const CharacterDetail: React.FC<ICharacterDetailProps> = ({ character }) => {
     : "Description not available";
 
   const storage = localStorage.getItem("favorites");
-  const favorite = storage?.includes(character.id.toString());
+  const favorite = storage!.includes(character.id.toString());
 
   return (
     <>

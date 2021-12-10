@@ -1,6 +1,6 @@
+import React, { useContext, useEffect, useState } from "react";
 import { SearchIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
-import React, { useContext, useEffect, useState } from "react";
 import CharContext from "../../context/charactersContext";
 
 interface ISearchBarProps {}
