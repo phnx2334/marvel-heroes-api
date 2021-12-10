@@ -46,10 +46,10 @@ const CharacterDetail: React.FC<ICharacterDetailProps> = ({ character }) => {
           <p className="flex-wrap max-w-md p-6 text-sm text-justify whitespace-pre-wrap sm:mb-4 sm:p-0 sm:max-w-full">
             {description}
           </p>
-          {character.comics.length > 0 && (
+          {character.comics?.length > 0 && (
             <CharDetails items={character.comics} type="Comics" />
           )}
-          {character.series.length > 0 && (
+          {character.series?.length > 0 && (
             <CharDetails items={character.series} type="Series" />
           )}
         </div>
