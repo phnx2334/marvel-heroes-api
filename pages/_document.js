@@ -11,36 +11,15 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <link
-            href="https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap"
-            rel="stylesheet"
-          ></link>
-          <link
-            href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
-            rel="stylesheet"
-          />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
-            rel="stylesheet"
-          />
-          <link
             href="https://fonts.googleapis.com/css2?family=Marvel&display=swap"
             rel="stylesheet"
           ></link>
-
-          {/* New fonts */}
-
           <link
             href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap"
             rel="stylesheet"
           ></link>
-
           <link
             href="https://fonts.googleapis.com/css2?family=Teko:wght@700&display=swap"
-            rel="stylesheet"
-          ></link>
-
-          <link
-            href="https://fonts.googleapis.com/css2?family=Bungee+Inline&family=Teko:wght@700&display=swap"
             rel="stylesheet"
           ></link>
         </Head>
