@@ -23,7 +23,6 @@ const CharacterDetail: React.FC<ICharacterDetailProps> = ({ character }) => {
   const [isFavorite, setIsFavorite] = useState<boolean | null>(null);
 
   useEffect(() => {
-    console.log("the character has", character)
     const params = router.query;
     const storage = localStorage.getItem("favorites");
     const favorite = storage?.includes(params.id as string);
@@ -75,7 +74,8 @@ export const getServerSideProps = async (
 
   try {
     //Get from API
-    const response = await axios.get("https://marvel-heroes-e5khe5j26-phnx2334.vercel.app/api/character", {
+    const url =  process.env.PUBLIC_URL || "http://localhost:3000";
+    const response = await axios.get(`${url}api/character`, {
       params: {
         characterId: characterId,
         alterName: alterName,
