@@ -26,9 +26,9 @@ const CharacterDetail: React.FC<ICharacterDetailProps> = ({ character }) => {
     const params = router.query;
     const storage = localStorage.getItem("favorites");
 
-    console.log("params id is",params.id )
+    console.log("params id is",params.characterId )
     console.log("storage id is",storage )
-    const favorite = storage?.includes(params.id as string);
+    const favorite = storage?.includes(params.characterId as string);
     if (favorite) {
       setIsFavorite(favorite);
     }
