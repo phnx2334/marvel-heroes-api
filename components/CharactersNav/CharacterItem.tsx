@@ -7,6 +7,7 @@ import { StarIcon as StarIconSolid, TrashIcon } from "@heroicons/react/solid";
 
 interface ICharactersItemProps {
   character: CharacterMinImg;
+  wasClicked: () => void;
 }
 
 type nameStorage = {
@@ -69,7 +70,10 @@ const initNameStorage = (id: string) => {
   }
 };
 
-const CharacterItem: React.FC<ICharactersItemProps> = ({ character }) => {
+const CharacterItem: React.FC<ICharactersItemProps> = ({
+  character,
+  wasClicked,
+}) => {
   const [favorite, setFavorite] = useState<boolean>(
     initFavStorage(character.id)
   );
@@ -177,7 +181,10 @@ const CharacterItem: React.FC<ICharactersItemProps> = ({ character }) => {
           deleted && "hidden"
         }`}
       >
-        <div className="p0 m-0 min-w-[300px] max-w-[300px]   max-h-[300px]">
+        <div
+          className="p0 m-0 min-w-[290px] max-w-[290px]   max-h-[290px]"
+          onClick={wasClicked}
+        >
           <Image
             src={character.image}
             alt={character.name}
@@ -189,13 +196,13 @@ const CharacterItem: React.FC<ICharactersItemProps> = ({ character }) => {
 
         <div className="flex bg-gray-800  p-1 flex-row justify-between  w-full">
           <PencilAltIcon
-            width="20px"
+            width="30px"
             className="text-white mx-1 hover:text-blue-600 cursor-default"
             onClick={onClickEditNameHandler}
           />
           {favorite ? (
             <StarIconSolid
-              width="20px"
+              width="30px"
               className={`text-white mx-1 hover:text-yellow-300 cursor-default ${
                 favorite ? "text-yellow-300" : ""
               } `}
@@ -203,7 +210,7 @@ const CharacterItem: React.FC<ICharactersItemProps> = ({ character }) => {
             />
           ) : (
             <StarIcon
-              width="20px"
+              width="30px"
               className={`text-white mx-1 hover:text-yellow-300 cursor-default ${
                 favorite ? "text-yellow-300" : ""
               } `}
@@ -212,7 +219,7 @@ const CharacterItem: React.FC<ICharactersItemProps> = ({ character }) => {
           )}
 
           <TrashIcon
-            width="20px"
+            width="30px"
             className="text-white mx-1 hover:text-red-600 cursor-default"
             onClick={onClickDeleteHandler}
           />
@@ -229,12 +236,18 @@ const CharacterItem: React.FC<ICharactersItemProps> = ({ character }) => {
             autoFocus
           />
         ) : (
-          <h2 className="max-w-sm m-auto mb-5 text-2xl px-2 text-center text-white whitespace-pre-wrap group-hover:font-bold active:text-red-500">
+          <h2
+            className="max-w-sm m-auto mb-5 text-2xl px-2 text-center text-white whitespace-pre-wrap group-hover:font-bold active:text-red-500"
+            onClick={wasClicked}
+          >
             {alterName !== "" ? alterName : character.name}
           </h2>
         )}
 
-        <div className="flex flex-col text-center  self-end mt-auto justify-center w-full text-base font-bold text-white bg-red-500">
+        <div
+          className="flex flex-col text-center  self-end mt-auto justify-center w-full text-base font-bold text-white bg-red-500"
+          onClick={wasClicked}
+        >
           <p>Find out more!</p>
         </div>
       </div>
