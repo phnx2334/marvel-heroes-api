@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import CharContext from "../../context/charactersContext";
 import CharacterItem from "./CharacterItem";
 import { CogIcon } from "@heroicons/react/outline";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/outline";
 
 const skeleton = (
   <div className="h-[400px] w-[220px] m-5 p-0 bg-gray-300 relative opacity-50 ">
@@ -22,8 +23,10 @@ const skeleton = (
 
 const CharactersNav: React.FC = () => {
   const ctx = useContext(CharContext);
-  const [_,setShowModal] = ctx.modal
-  const charsLen = ctx.characterList.length
+  const [_, setShowModal] = ctx.modal;
+  const charsLen = ctx.characterList.length;
+
+  const resultDiv = useRef<HTMLDivElement | null>(null);
 
   if (ctx.hasError) {
     return (
@@ -40,7 +43,7 @@ const CharactersNav: React.FC = () => {
     }
     return (
       <>
-        <div className="flex p-6 space-x-10">
+        <div className="flex p-6 space-x-10 animate-fadeIn">
           {skeletons.map((skeleton) => {
             return skeleton;
           })}
@@ -57,14 +60,43 @@ const CharactersNav: React.FC = () => {
     );
   }
 
+  const scroll = (side: string) => {
+    if (side === "left") {
+      resultDiv.current!.scrollLeft -= 235;
+    } else {
+      resultDiv.current!.scrollLeft += 235;
+    }
+  };
+
   return (
     <>
       <nav>
         <div className="flex pl-1 items-center justify-center w-full text-2xl font-bold text-white bg-red-500">
           <h1>Select your hero...</h1>
-          <CogIcon width="20px" className="absolute right-1" onClick={()=>setShowModal(true)}/>
+          <CogIcon
+            width="20px"
+            className="absolute right-1"
+            onClick={() => setShowModal(true)}
+          />
         </div>
-        <div className={`flex p-6 space-x-10 overflow-x-scroll text-2xl px10 whitespace-nowrap ${charsLen === 1 && 'justify-center'}sm:px-20 sm:space-x-20 scrollbar-hide sm:scrollbar-default`}>
+        <span className="hidden items-center justify-center m-4 sm:flex">
+          <ChevronLeftIcon
+            width={40}
+            onClick={() => scroll("left")}
+            className="transform ease-in-out delay-150  hover:scale-125 duration-300"
+          />
+          <ChevronRightIcon
+            width={40}
+            onClick={() => scroll("right")}
+            className="transform ease-in-out delay-150  hover:scale-125 duration-300"
+          />
+        </span>
+        <div
+          className={`flex p-6 space-x-10 overflow-x-scroll text-2xl px10 whitespace-nowrap ${
+            charsLen === 1 && "justify-center"
+          }sm:px-20 sm:space-x-20 scrollbar-hide sm:scrollbar-default`}
+          ref={resultDiv}
+        >
           {ctx.characterList.map((item) => {
             return <CharacterItem key={item.id} character={item} />;
           })}

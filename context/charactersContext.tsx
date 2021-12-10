@@ -76,7 +76,7 @@ export const CharContextProvider: React.FC = (props) => {
       setIsLoading(false);
     } catch (error) {
       setHasError(true);
-      setErrorMsg("No favorite characters were found");
+      setErrorMsg("No favorite characters were found. Try adding some first!");
       console.log("Error fetching server side data", error);
     }
   };

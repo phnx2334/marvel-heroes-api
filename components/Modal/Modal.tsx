@@ -29,7 +29,7 @@ const Modal: React.FC<IModalProps> = ({ show, onClose, children }) => {
     <>
       {backdrop}
       <div className="flex flex-col w-screen h-4/5 items-center">
-        <div className="bg-white w-[300px] h-auto p-4 z-10 absolute top-[200px] text-black font-bold text-center">
+        <div className="bg-gray-900 w-[300px] h-auto p-4 z-10 absolute top-[200px] text-white font-bold text-center">
           <div className="flex justify-end text-base">
             <a href="#" onClick={handleCloseClick}>
               x

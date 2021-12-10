@@ -9,6 +9,9 @@
     @apply bg-gradient-to-r from-red-800 to-[#06202A] text-gray-300;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
 
   /* width */
   ::-webkit-scrollbar {
