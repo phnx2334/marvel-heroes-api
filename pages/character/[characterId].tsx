@@ -20,9 +20,11 @@ const CharacterDetail: React.FC<ICharacterDetailProps> = ({ character }) => {
 
   useEffect(() => {
     const storage = localStorage.getItem("favorites");
-    const favorite = storage!.includes(character.id.toString());
-    setIsFavorite(favorite);
-  }, []);
+    const favorite = storage?.includes(character.id.toString());
+    if (favorite) {
+      setIsFavorite(favorite);
+    }
+  }, [character.id]);
 
   return (
     <>
