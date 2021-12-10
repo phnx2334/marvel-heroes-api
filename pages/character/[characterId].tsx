@@ -1,6 +1,6 @@
 import { GetServerSidePropsContext } from "next";
 import axios from "axios";
-import { characterFull } from "../../types/character";
+import { CharacterSinglePage } from "../../types/character";
 import Image from "next/image";
 import CharDetails from "../../components/CharDetails/CharDetails";
 import Footer from "../../components/Footer/Footer";
@@ -9,23 +9,25 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 interface ICharacterDetailProps {
-  character: characterFull;
+  character: CharacterSinglePage;
 }
 
+//Renders the page on the server side every time it is requested
 const CharacterDetail: React.FC<ICharacterDetailProps> = ({ character }) => {
   const description = character.description
     ? character.description
     : "Description not available";
 
   const router = useRouter();
-  
 
   const [isFavorite, setIsFavorite] = useState<boolean | null>(null);
 
+  //Check wether it is marked as favorite or not
   useEffect(() => {
     const params = router.query;
     const storage = localStorage.getItem("favorites");
-    const favorite = storage?.includes(params.id as string);
+
+    const favorite = storage?.includes(params.characterId as string);
     if (favorite) {
       setIsFavorite(favorite);
     }
@@ -73,8 +75,7 @@ export const getServerSideProps = async (
   const alterName = context.query!.alterName;
 
   try {
-    //Get from API
-    const url =  process.env.PUBLIC_URL || "http://localhost:3000";
+    const url = process.env.PUBLIC_URL || "http://localhost:3000";
     const response = await axios.get(`${url}api/character`, {
       params: {
         characterId: characterId,

@@ -7,13 +7,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        nunito: ["nunito", "sans-serif"],
-        lobster: ["lobster", "sans-serif"],
         marvel: ["marvel", "sans-serif"],
         permanent: ["Permanent Marker", "sans-serif"],
         teko: ["teko", "sans-serif"],
-        Bungee: ["Bungee Inline", "sans-serif"],
-
         sans: ["marvel", ...defaultTheme.fontFamily.sans],
       },
       animation: {

@@ -1,8 +1,9 @@
 import axios from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
 import buildUrl from "../../util/api";
-import { Character, characterFull, ComicSeries } from "../../types/character";
+import { CharacterFull, CharacterSinglePage, ComicSeries } from "../../types/character";
 
+//Returns a single character page information
 export default async function characterHandler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -22,11 +23,12 @@ export default async function characterHandler(
       const comicsReq = axios.get(comicsUrl);
       const seriesReq = axios.get(seriesUrl);
 
+      //Execute all requests at once
       axios
         .all([charReq, comicsReq, seriesReq])
         .then(
           axios.spread((...responses) => {
-            const charRes: Character[] = responses[0].data.data.results;
+            const charRes: CharacterFull[] = responses[0].data.data.results;
             const comicsRes: ComicSeries[] = responses[1].data.data.results;
             const seriesRes: ComicSeries[] = responses[2].data.data.results;
 
@@ -38,7 +40,7 @@ export default async function characterHandler(
               const imgNotAvailable =
                 "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg";
 
-              const responseData: characterFull = {
+              const responseData: CharacterSinglePage = {
                 id: id,
                 name: (alterName as string) || name.trim(),
                 description: description.trim(),
@@ -67,6 +69,7 @@ export default async function characterHandler(
   }
 }
 
+//Clean the results leaving only the relevant needed info
 const cleanResults = (items: ComicSeries[]) => {
   if (!(items.length > 0)) return [];
 

@@ -1,4 +1,4 @@
-export interface Character {
+export interface CharacterFull {
   id: number;
   name: string;
   description: string;
@@ -15,16 +15,14 @@ export interface Character {
   series: any[];
 }
 
-export interface CharacterMin {
+export interface CharacterMinImg {
   id: number;
   name: string;
   description: string;
   image: string;
-  apiPage: string;
-  resource: string;
 }
 
-export interface characterFull {
+export interface CharacterSinglePage {
   id: number;
   name: string;
   description: string;

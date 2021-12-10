@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { Dispatch, SetStateAction, useState } from "react";
-import { CharacterMin } from "../types/character";
+import { CharacterMinImg } from "../types/character";
 
 interface ICharContextType {
-  characterList: CharacterMin[];
+  characterList: CharacterMinImg[];
   fetchCharacters: (newText: string, filter: string) => void;
   fetchFavorites: (ids: string) => void;
   isLoading: boolean;
@@ -22,8 +22,10 @@ const CharContext = React.createContext<ICharContextType>({
   modal: [false, () => {}],
 });
 
+
+//Context handles all the fetching operations for the lists of characters. Single character page is server side rendered.
 export const CharContextProvider: React.FC = (props) => {
-  const [charactersList, setCharactersList] = useState<CharacterMin[]>([]);
+  const [charactersList, setCharactersList] = useState<CharacterMinImg[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);

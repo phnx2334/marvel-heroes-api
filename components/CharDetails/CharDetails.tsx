@@ -8,6 +8,7 @@ interface ICharDetailsProps {
   type: "Comics" | "Series";
 }
 
+//Shows the collection of series and comics retreived from the Marvel API
 const CharDetails: React.FC<ICharDetailsProps> = ({ items, type }) => {
   return (
     <Collapsible label={type}>

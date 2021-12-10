@@ -1,9 +1,16 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { Character, MediaCharacter } from "../../types/character";
+import {
+  CharacterFull,
+  CharacterMinImg,
+  MediaCharacter,
+} from "../../types/character";
 import buildUrl, { filters } from "../../util/api";
 
-//Get specific character with given name
+type characterData = { id: string; name: string };
+type characterDataItem = { resourceURI: string; name: string };
+
+//Returns lists of character based on selected filter
 export default async function charactersListHandler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -23,7 +30,7 @@ export default async function charactersListHandler(
       if (filter === "characters") {
         if (response.data.data.results.length) {
           const characters = response.data.data.results.map(
-            (item: Character) => {
+            (item: CharacterFull) => {
               return {
                 id: item.id,
                 name: item.name.trim(),
@@ -40,9 +47,12 @@ export default async function charactersListHandler(
           res.status(404).send("Hero not found");
         }
       } else {
-        filterWithCharacters(response.data.data.results, (characters: any) => {
-          res.status(200).send(characters);
-        });
+        getCharactersList(
+          response.data.data.results,
+          (characters: CharacterMinImg[]) => {
+            res.status(200).send(characters);
+          }
+        );
       }
     } catch (error) {
       console.log("error fetching characters", error);
@@ -54,15 +64,15 @@ export default async function charactersListHandler(
   }
 }
 
-const filterWithCharacters = (data: MediaCharacter[], callback: any) => {
-  const characters: any = [];
-  const addedItems: any[] = [];
+const getCharactersList = (data: MediaCharacter[], callback: any) => {
+  const characters: characterData[] = [];
+  const addedItems: string[] = [];
   //Get characters
-  data.map((item: any) => {
+  data.map((item: MediaCharacter) => {
     if (item.characters.returned > 0) {
       const items = item.characters.items;
 
-      items.map((item: any) => {
+      items.map((item: characterDataItem) => {
         const uriArr = item.resourceURI.split("/");
         const id = uriArr[uriArr.length - 1];
         const name = item.name;
@@ -79,20 +89,19 @@ const filterWithCharacters = (data: MediaCharacter[], callback: any) => {
   });
 
   //For each character push a request to be made to the array
-  const requests: any = [];
+  const requests: Promise<AxiosResponse<any, any>>[] = [];
 
-  characters.map((character: any) => {
+  characters.map((character: characterData) => {
     const characterUrl = buildUrl("character", character.id);
     const charReq = axios.get(characterUrl);
     requests.push(charReq);
   });
 
   //Make all requests at once
-  let results: any = [];
   axios
     .all(requests)
     .then(
-      (results = axios.spread((...responses) => {
+      axios.spread((...responses) => {
         //For each response
         const responseData = responses.map((response: any) => {
           const { id, name, description, thumbnail } =
@@ -114,7 +123,7 @@ const filterWithCharacters = (data: MediaCharacter[], callback: any) => {
         });
 
         callback(responseData);
-      }))
+      })
     )
     .catch((errors) => {
       console.log("Error fetching filtered character data", errors);

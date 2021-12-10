@@ -7,7 +7,7 @@ interface ICollapsibleProps {
 
 const Collapsible: React.FC<ICollapsibleProps> = (props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const parentRef = useRef<any>();
+  const parentRef = useRef<HTMLDivElement | null>(null);
   const rotate = isOpen ? "rotate-180" : "rotate-0";
 
   return (
@@ -31,7 +31,7 @@ const Collapsible: React.FC<ICollapsibleProps> = (props) => {
         ref={parentRef}
         style={
           isOpen
-            ? { height: parentRef.current.scrollHeight + "px" }
+            ? { height: parentRef.current?.scrollHeight + "px" }
             : { height: "0px" }
         }
       >
