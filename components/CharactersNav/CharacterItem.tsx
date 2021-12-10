@@ -173,14 +173,14 @@ const CharacterItem: React.FC<ICharactersItemProps> = ({ character }) => {
       passHref
     >
       <div
-        className={`flex flex-col relative border-2 items-center m-1 max-h-[600px] max-w-min cursor-pointer group hover:scale-105 hover:z-50 ${
+        className={`flex flex-col relative border-2 items-center m-1 max-h-[500px] max-w-min cursor-pointer group hover:scale-105 hover:z-50 ${
           deleted && "hidden"
         }`}
       >
         <div className="p0 m-0 min-w-[300px] max-w-[300px]   max-h-[300px]">
           <Image
             src={character.image}
-            alt="Hero"
+            alt={character.name}
             layout="responsive"
             height={1080}
             width={1080}
