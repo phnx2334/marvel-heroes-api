@@ -15,7 +15,7 @@ const Header: React.FC<IHeaderProps> = () => {
   };
 
   return (
-    <header className="h-auto w-full bg-[#ac171c] flex flex-col items-center justify-center md:flex-row md:p-8 md:items-start">
+    <header className="h-auto w-full bg-[#ac171c] flex flex-col items-center justify-center md:flex-row md:p-8 md:pt-5 md:items-start">
       <Link href="/" passHref>
         <div
           className="flex items-center mt-6 cursor-pointer"

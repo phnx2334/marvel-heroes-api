@@ -14,11 +14,16 @@ module.exports = {
       },
       animation: {
         fadeIn: "fadeIn 0.5s ease-in-out",
+        loadingPulse: "loadingPulse 2s ease-in-out infinite",
       },
       keyframes: () => ({
         fadeIn: {
           "0%": { opacity: 0 },
           "100%": { opacity: 100 },
+        },
+        loadingPulse: {
+          "0%,100%": { transform: "scale(1)", opacity: "1" },
+          "50%": { transform: "scale(0.9)", opacity: ".5" },
         },
       }),
     },

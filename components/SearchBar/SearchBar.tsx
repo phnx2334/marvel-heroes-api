@@ -59,7 +59,7 @@ const SearchBar: React.FC<ISearchBarProps> = () => {
   };
 
   return (
-    <div className="flex flex-col p-2 md:self-baseline md:ml-auto group">
+    <div className="flex flex-col p-2 mt-0 md:self-baseline md:ml-auto group">
       <div className="mb-0.5 transition ease-in-out delay-150 opacity-0 group-hover:opacity-100 duration-300">
         <span className="p-1 max-w-min text-xs bg-black text-white sm:text-base">
           Min 3 characters

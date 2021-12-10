@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useState } from "react";
 import CharContext from "../../context/charactersContext";
 import CharacterItem from "./CharacterItem";
 import { CogIcon } from "@heroicons/react/outline";
@@ -11,7 +11,7 @@ const skeleton = (id: number) => {
       className="h-[450px] w-[600px] m-5 p-0 bg-gray-300 relative opacity-50"
     >
       <div className="flex animate-pulse flex-col justify-center">
-        <div id="image" className="w-[300px] bg-gray-400 h-[300px]"></div>
+        <div id="image" className="w-[290px] bg-gray-400 h-[290px]"></div>
         <div className="w-full bg-gray-900 h-6"></div>
         <div
           id="texts"
@@ -35,6 +35,10 @@ const CharactersNav: React.FC = () => {
   const charsLen = ctx.characterList.length;
 
   const resultDiv = useRef<HTMLDivElement | null>(null);
+  const [placeholderText, setPlaceholderText] = useState("Select your hero...");
+  const loading =
+    placeholderText !== "Select your hero..." &&
+    "font-bold animate-loadingPulse";
 
   if (ctx.hasError) {
     return (
@@ -69,11 +73,15 @@ const CharactersNav: React.FC = () => {
     );
   }
 
+  const handleClickCharacter = () => {
+    setPlaceholderText("Loading...");
+  };
+
   return (
     <>
       <nav>
         <div className="flex pl-1 items-center justify-center w-full text-2xl font-bold text-white bg-red-500">
-          <h1>Select your hero...</h1>
+          <h1 className={`${loading}`}>{placeholderText}</h1>
           <CogIcon
             width="20px"
             className="absolute right-1"
@@ -88,7 +96,13 @@ const CharactersNav: React.FC = () => {
           ref={resultDiv}
         >
           {ctx.characterList.map((item) => {
-            return <CharacterItem key={item.id} character={item} />;
+            return (
+              <CharacterItem
+                key={item.id}
+                character={item}
+                wasClicked={handleClickCharacter}
+              />
+            );
           })}
         </div>
       </nav>
