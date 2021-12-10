@@ -5,6 +5,7 @@ import Image from "next/image";
 import CharDetails from "../../components/CharDetails/CharDetails";
 import Footer from "../../components/Footer/Footer";
 import { StarIcon } from "@heroicons/react/solid";
+import { useEffect, useState } from "react";
 
 interface ICharacterDetailProps {
   character: characterFull;
@@ -15,14 +16,19 @@ const CharacterDetail: React.FC<ICharacterDetailProps> = ({ character }) => {
     ? character.description
     : "Description not available";
 
-  const storage = localStorage.getItem("favorites");
-  const favorite = storage!.includes(character.id.toString());
+  const [isFavorite, setIsFavorite] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const storage = localStorage.getItem("favorites");
+    const favorite = storage!.includes(character.id.toString());
+    setIsFavorite(favorite);
+  }, []);
 
   return (
     <>
       <h1 className="flex  font-teko text-center  align-top py-3 items-center  justify-center text-4xl text-white bg-gray-400 bg-opacity-20 h-auto sm:text-5xl md:text-6xl sm:h-20 md:h-28">
         {character.name}
-        {favorite && <StarIcon className="mx-3 w-[40px] text-yellow-300" />}
+        {isFavorite && <StarIcon className="mx-3 w-[40px] text-yellow-300" />}
       </h1>
 
       <main className="flex flex-col items-start p-2 m-2 overscroll-y-auto sm:grid grid-cols-2 sm:p-4">
